@@ -31,9 +31,8 @@ struct MenuButton
 
     void drawButton()
     {
-
         txSelectFont("Arial", 30);
-        txTransparentBlt(txDC(), x1,   y1, x2 - x1, y2-y1, baton, 0,0 ,TX_WHITE);
+        Win32::TransparentBlt(txDC(), x1,   y1, x2 - x1, y2-y1, baton, 0, 0, 530, 140, TX_WHITE);
         txDrawText      (x1, y1, x2, y2, text);
     }
 };
@@ -43,14 +42,14 @@ int main()
     txCreateWindow(1200, 700);
     HDC  poni = txLoadImage ("Pictures/pony/unicorn.bmp");
     HDC  baton = txLoadImage ("Pictures/Menu_Button.bmp");
-    HDC  head = txLoadImage ("Pictures/Head.bmp");
+    HDC  head = txLoadImage ("Pictures/Head/Head.bmp");
 
-    MenuButton b[5];
-    b[0] = {baton, 0,530,  0,130,"ÏÎÍÈ"};
-    b[1] = {baton, 0,530,130,260,"ÕÂÎÑÒ"};
-    b[2] = {baton, 0,530,260,390,"ÊÎÏÛÒÀ"};
-    b[3] = {baton, 0,530,390,520,"ÃÎËÎÂÀ"};
-    b[4] = {baton, 0,530,520,650,"ÒÅËÎ"};
+    MenuButton buttons[5];
+    buttons[0] = {baton, 0,400,  0, 90,"����"};
+    buttons[1] = {baton, 0,400, 90,180,"�����"};
+    buttons[2] = {baton, 0,400,180,270,"������"};
+    buttons[3] = {baton, 0,400,270,360,"������"};
+    buttons[4] = {baton, 0,400,360,450,"����"};
 
     MapObject vybor_pony[3];
     vybor_pony[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Pony/pony1.bmp")};
@@ -59,8 +58,8 @@ int main()
     bool vid = false;
 
     MapObject pic[2];
-    pic[0] = {600,  0,1000,400,poni};
-    pic[1] = {600,  0,1000,200,head};
+    pic[0] = {500, 100, 900, 500, poni};
+    pic[1] = {500, 100, 900, 300, head};
     bool visible = false;
 
     while (!GetAsyncKeyState(VK_ESCAPE))
@@ -71,21 +70,20 @@ int main()
 
         for (int nomer_knopki = 0; nomer_knopki < 5; nomer_knopki++)
         {
-            b[nomer_knopki].drawButton();
-
+            buttons[nomer_knopki].drawButton();
         }
 
         pic[0].drawMapObject();
         if(visible)
         {
-         pic[1].drawMapObject();
+            pic[1].drawMapObject();
         }
 
 
         /*for (int nomer_kart = 0; nomer_kart < 2; nomer_kart++)
         {
             pic[nomer_kart].drawMapObject();
-        }
+        } */
 
         if (vid)
         {
@@ -94,27 +92,20 @@ int main()
             vybor_pony[2].drawMapObject2();
         }
 
-        //drawButton(0, 0, baton,   "ÏÎÍÈ"  ) ;
-        /*drawButton(0, 130, baton, "ÕÂÎÑÒ" ) ;
-        drawButton(0, 260, baton,"ÊÎÏÛÒÀ" ) ;
-        drawButton(0, 390, baton,"ÃÎËÎÂÀ" ) ;
-        drawButton(0, 520, baton, "ÒÅËÎ"  ) ;    */
-
         if (txMouseButtons() & 1 &&
-            txMouseX() >= 100 &&
-            txMouseX() <= 530 &&
-            txMouseY() >=   0 + 30 &&
-            txMouseY() <= 140 - 45)
+            txMouseX() >= buttons[0].x1 &&
+            txMouseX() <= buttons[0].x2 &&
+            txMouseY() >= buttons[0].y1 &&
+            txMouseY() <= buttons[0].y2)
         {
             visible = true;
         }
 
         if  (txMouseButtons() & 1 &&
-            txMouseX() >= 100 &&
-            txMouseX() <= 530 &&
-            txMouseY() >=   0 + 30 &&
-            txMouseY() <= 140 - 45)
-
+            txMouseX() >= buttons[1].x1 &&
+            txMouseX() <= buttons[1].x2 &&
+            txMouseY() >= buttons[1].y1 &&
+            txMouseY() <= buttons[1].y2)
         {
             vid = true;
         }
@@ -128,6 +119,7 @@ int main()
     txDeleteDC (vybor_pony[1].picture);
     txDeleteDC (vybor_pony[2].picture);
     txDeleteDC (pic[0].picture);
+    txDeleteDC (pic[1].picture);
     txDeleteDC (baton);
 
     return 0;
