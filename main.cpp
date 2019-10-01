@@ -12,6 +12,11 @@ struct MapObject
     {
         txBitBlt(txDC(), x,  y, x2 - x, y2 - y, picture);
     }
+
+    void drawMapObject2()
+    {
+        Win32::TransparentBlt(txDC(), x,  y, x2 - x, y2 - y, picture, 0, 0, 600, 400, TX_WHITE);
+    }
 };
 
 struct MenuButton
@@ -23,7 +28,6 @@ struct MenuButton
     int y1;
     int y2;
     const char* text;
-
 
     void drawButton()
     {
@@ -42,13 +46,17 @@ int main()
     HDC  head = txLoadImage ("Pictures/Head.bmp");
 
     MenuButton b[5];
-    b[0] = {baton, 0,530,  0,130,"œŒÕ»"};
-    b[1] = {baton, 0,530,130,260,"’¬Œ—“"};
-    b[2] = {baton, 0,530,260,390," Œœ€“¿"};
-    b[3] = {baton, 0,530,390,520,"√ŒÀŒ¬¿"};
-    b[4] = {baton, 0,530,520,650,"“≈ÀŒ"};
+    b[0] = {baton, 0,530,  0,130,"√è√é√ç√à"};
+    b[1] = {baton, 0,530,130,260,"√ï√Ç√é√ë√í"};
+    b[2] = {baton, 0,530,260,390,"√ä√é√è√õ√í√Ä"};
+    b[3] = {baton, 0,530,390,520,"√É√é√ã√é√Ç√Ä"};
+    b[4] = {baton, 0,530,520,650,"√í√Ö√ã√é"};
 
-
+    MapObject vybor_pony[3];
+    vybor_pony[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Pony/pony1.bmp")};
+    vybor_pony[1] = {1000,200,1200,400,txLoadImage ("Pictures/Pony/pony2.bmp")};
+    vybor_pony[2] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/pony4.bmp")};
+    bool vid = false;
 
     MapObject pic[2];
     pic[0] = {600,  0,1000,400,poni};
@@ -57,10 +65,9 @@ int main()
 
     while (!GetAsyncKeyState(VK_ESCAPE))
     {
+        txBegin();
         txSetFillColor(TX_BLACK);
         txClear();
-
-
 
         for (int nomer_knopki = 0; nomer_knopki < 5; nomer_knopki++)
         {
@@ -80,13 +87,18 @@ int main()
             pic[nomer_kart].drawMapObject();
         }
 
+        if (vid)
+        {
+            vybor_pony[0].drawMapObject2();
+            vybor_pony[1].drawMapObject2();
+            vybor_pony[2].drawMapObject2();
+        }
 
-        //drawButton(0, 0, baton,   "œŒÕ»"  ) ;
-        /*drawButton(0, 130, baton, "’¬Œ—“" ) ;
-        drawButton(0, 260, baton," Œœ€“¿" ) ;
-        drawButton(0, 390, baton,"√ŒÀŒ¬¿" ) ;
-        drawButton(0, 520, baton, "“≈ÀŒ"  ) ;    */
-
+        //drawButton(0, 0, baton,   "√è√é√ç√à"  ) ;
+        /*drawButton(0, 130, baton, "√ï√Ç√é√ë√í" ) ;
+        drawButton(0, 260, baton,"√ä√é√è√õ√í√Ä" ) ;
+        drawButton(0, 390, baton,"√É√é√ã√é√Ç√Ä" ) ;
+        drawButton(0, 520, baton, "√í√Ö√ã√é"  ) ;    */
 
         if (txMouseButtons() & 1 &&
             txMouseX() >= 100 &&
@@ -95,22 +107,27 @@ int main()
             txMouseY() <= 140 - 45)
         {
             visible = true;
-            //txMessageBox("1", "2");
         }
 
-        if  (txMouseX() >= 100 &&
+        if  (txMouseButtons() & 1 &&
+            txMouseX() >= 100 &&
             txMouseX() <= 530 &&
             txMouseY() >=   0 + 30 &&
             txMouseY() <= 140 - 45)
+
         {
-            txTextOut(500, 50, "dsf");
+            vid = true;
         }
 
         txSleep(10);
+        txEnd();
     }
 
 
-    //txDeleteDC (poni);
+    txDeleteDC (vybor_pony[0].picture);
+    txDeleteDC (vybor_pony[1].picture);
+    txDeleteDC (vybor_pony[2].picture);
+    txDeleteDC (pic[0].picture);
     txDeleteDC (baton);
 
     return 0;
