@@ -7,6 +7,8 @@ struct MapObject
     int x2;
     int y2;
     HDC picture;
+    int srk_width;
+    int srk_height;
 
     void drawMapObject()
     {
@@ -15,7 +17,7 @@ struct MapObject
 
     void drawMapObject2()
     {
-        Win32::TransparentBlt(txDC(), x,  y, x2 - x, y2 - y, picture, 0, 0, 600, 400, TX_WHITE);
+        Win32::TransparentBlt(txDC(), x,  y, x2 - x, y2 - y, picture, 0, 0, srk_width, srk_height, TX_WHITE);
     }
 };
 
@@ -40,9 +42,9 @@ struct MenuButton
 int main()
     {
     txCreateWindow(1200, 700);
-    HDC  poni = txLoadImage ("Pictures/pony/unicorn.bmp");
+    //HDC  poni = txLoadImage ("Pictures/pony/unicorn.bmp");
     HDC  baton = txLoadImage ("Pictures/Menu_Button.bmp");
-    HDC  head = txLoadImage ("Pictures/Head/Head.bmp");
+    //HDC  head = txLoadImage ("Pictures/Head/Head.bmp");
 
     MenuButton buttons[5];
     buttons[0] = {baton, 0,400,  0, 90,"онмх"};
@@ -52,14 +54,14 @@ int main()
     buttons[4] = {baton, 0,400,360,450,"рекн"};
 
     MapObject vybor_pony[3];
-    vybor_pony[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Pony/pony1.bmp")};
-    vybor_pony[1] = {1000,200,1200,400,txLoadImage ("Pictures/Pony/pony2.bmp")};
-    vybor_pony[2] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/pony4.bmp")};
+    vybor_pony[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Pony/pony1.bmp"), 600, 400};
+    vybor_pony[1] = {1000,200,1200,400,txLoadImage ("Pictures/Pony/pony2.bmp"), 600, 400};
+    vybor_pony[2] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/pony4.bmp"), 600, 400};
     bool vid = false;
 
-    MapObject pic[2];
-    pic[0] = {500, 100, 900, 500, poni};
-    pic[1] = {500, 100, 900, 300, head};
+    MapObject vybor_chasti[2];
+    vybor_chasti[0] = {500, 100, 900, 500,txLoadImage ("Pictures/pony/unicorn.bmp"), 600, 400};
+    vybor_chasti[1] = {500, 100, 900, 300,txLoadImage ("Pictures/Head/Head.bmp"), 280, 180};
     bool visible = false;
 
     while (!GetAsyncKeyState(VK_ESCAPE))
@@ -73,10 +75,10 @@ int main()
             buttons[nomer_knopki].drawButton();
         }
 
-        pic[0].drawMapObject();
+        vybor_chasti[0].drawMapObject2();
         if(visible)
         {
-            pic[1].drawMapObject();
+            vybor_chasti[1].drawMapObject2();
         }
 
 
@@ -118,8 +120,8 @@ int main()
     txDeleteDC (vybor_pony[0].picture);
     txDeleteDC (vybor_pony[1].picture);
     txDeleteDC (vybor_pony[2].picture);
-    txDeleteDC (pic[0].picture);
-    txDeleteDC (pic[1].picture);
+    txDeleteDC (vybor_chasti[0].picture);
+    txDeleteDC (vybor_chasti[1].picture);
     txDeleteDC (baton);
 
     return 0;
