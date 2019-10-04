@@ -1,26 +1,4 @@
 #include "TXLib.h"
-
-struct MapObject
-{
-    int x;
-    int y;
-    int x2;
-    int y2;
-    HDC picture;
-    int srk_width;
-    int srk_height;
-
-    void drawMapObject()
-    {
-        txBitBlt(txDC(), x,  y, x2 - x, y2 - y, picture);
-    }
-
-    void drawMapObject2()
-    {
-        Win32::TransparentBlt(txDC(), x,  y, x2 - x, y2 - y, picture, 0, 0, srk_width, srk_height, TX_WHITE);
-    }
-};
-
 #include "Button.cpp"
 #include "MapObjects.cpp"
 
@@ -29,11 +7,11 @@ int main()
     txCreateWindow(1200, 700);
   
     MenuButton buttons[5];
-    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"ÏÎÍÈ", 530, 140};
-    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"ÕÂÎÑÒ", 530, 140};
-    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"ÊÎÏÛÒÀ", 530, 140};
-    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"ÃÎËÎÂÀ", 530, 140};
-    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"ÒÅËÎ", 530, 140};
+    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"ПОНИ", 530, 140};
+    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"ХВОСТ", 530, 140};
+    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"КОПЫТА", 530, 140};
+    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"ГОЛОВА", 530, 140};
+    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"ТЕЛО", 530, 140};
 
     MapObject vybor_pony[3];
     vybor_pony[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Pony/pony1.bmp")};
@@ -91,7 +69,7 @@ int main()
         txEnd();
     }
 
-    //Óäàëåíèå êàðòèíîê
+    //Удаление картинок
     for (int i = 0; i <=2; i++)
     {
         txDeleteDC (vybor_pony[i].picture);
