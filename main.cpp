@@ -1,17 +1,39 @@
 #include "TXLib.h"
+
+struct MapObject
+{
+    int x;
+    int y;
+    int x2;
+    int y2;
+    HDC picture;
+    int srk_width;
+    int srk_height;
+
+    void drawMapObject()
+    {
+        txBitBlt(txDC(), x,  y, x2 - x, y2 - y, picture);
+    }
+
+    void drawMapObject2()
+    {
+        Win32::TransparentBlt(txDC(), x,  y, x2 - x, y2 - y, picture, 0, 0, srk_width, srk_height, TX_WHITE);
+    }
+};
+
 #include "Button.cpp"
 #include "MapObjects.cpp"
 
 int main()
     {
     txCreateWindow(1200, 700);
-
+  
     MenuButton buttons[5];
-    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"œŒÕ»", 530, 140};
-    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"’¬Œ—“", 530, 140};
-    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270," Œœ€“¿", 530, 140};
-    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"√ŒÀŒ¬¿", 530, 140};
-    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"“≈ÀŒ", 530, 140};
+    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"√è√é√ç√à", 530, 140};
+    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"√ï√Ç√é√ë√í", 530, 140};
+    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"√ä√é√è√õ√í√Ä", 530, 140};
+    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"√É√é√ã√é√Ç√Ä", 530, 140};
+    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"√í√Ö√ã√é", 530, 140};
 
     MapObject vybor_pony[3];
     vybor_pony[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Pony/pony1.bmp")};
@@ -19,9 +41,9 @@ int main()
     vybor_pony[2] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/pony4.bmp")};
     bool vid = false;
 
-    MapObject pic[2];
-    pic[0] = {500, 100, 900, 500, txLoadImage ("Pictures/pony/unicorn.bmp")};
-    pic[1] = {500, 100, 900, 300, txLoadImage ("Pictures/Head/Head.bmp")};
+    MapObject vybor_chasti[2];
+    vybor_chasti[0] = {500, 100, 900, 500, txLoadImage ("Pictures/pony/unicorn.bmp")};
+    vybor_chasti[1] = {500, 100, 900, 300, txLoadImage ("Pictures/Head/Head.bmp")};
     bool visible = false;
 
     while (!GetAsyncKeyState(VK_ESCAPE))
@@ -35,11 +57,10 @@ int main()
             buttons[nomer_knopki].drawButton();
         }
 
-        pic[0].drawMapObject();
-
-        if (visible)
+        vybor_chasti[0].drawMapObject2();
+        if(visible)
         {
-           pic[1].drawMapObject();
+            vybor_chasti[1].drawMapObject2();
         }
 
         /*for (int nomer_kart = 0; nomer_kart < 2; nomer_kart++)
@@ -70,14 +91,14 @@ int main()
         txEnd();
     }
 
-    //”‰‡ÎÂÌËÂ Í‡ÚËÌÓÍ
+    //√ì√§√†√´√•√≠√®√• √™√†√∞√≤√®√≠√Æ√™
     for (int i = 0; i <=2; i++)
     {
         txDeleteDC (vybor_pony[i].picture);
     }
     for (int i = 0; i <=1; i++)
     {
-        txDeleteDC (pic[i].picture);
+        txDeleteDC (vybor_chasti[i].picture);
     }
 
     return 0;
