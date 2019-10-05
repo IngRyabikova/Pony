@@ -19,6 +19,12 @@ int main()
     vybor_pony[2] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/pony4.bmp"), 600, 400};
     bool vid = false;
 
+    MapObject vybor_golova[3];
+    vybor_golova[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Head/Head1.bmp"), 259, 165};
+    vybor_golova[1] = {1000,200,1200,400,txLoadImage ("Pictures/Head/Head2.bmp"), 253, 178};
+    vybor_golova[2] = {1000,400,1200,600,txLoadImage ("Pictures/Head/Head3.bmp"), 284, 219};
+    bool vid2 = false;
+
     MapObject vybor_chasti[2];
     vybor_chasti[0] = {400, 100, 1000, 500, txLoadImage ("Pictures/pony/unicorn.bmp"), 600, 400};
     vybor_chasti[1] = {400, 100, 640, 270, txLoadImage ("Pictures/Head/Head.bmp"), 280, 180};
@@ -53,13 +59,20 @@ int main()
             vybor_pony[2].drawMapObject2();
         }
 
-        if (buttons [0].Click())
+		if (vid2)
         {
-            visible = !visible;
+            vybor_golova[0].drawMapObject2();
+            vybor_golova[1].drawMapObject2();
+            vybor_golova[2].drawMapObject2();
+        }
+
+        if (buttons [3].Click())
+        {
+            vid2 = !vid2;
             txSleep(200);
         }
 
-        if (buttons [1].Click())
+        if (buttons [0].Click())
         {
             vid = !vid;
             txSleep(200);
