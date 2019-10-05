@@ -5,23 +5,23 @@
 int main()
     {
     txCreateWindow(1200, 700);
-  
+
     MenuButton buttons[5];
-    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"РџРћРќР", 530, 140};
-    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"РҐР’РћРЎРў", 530, 140};
-    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"РљРћРџР«РўРђ", 530, 140};
-    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Р“РћР›РћР’Рђ", 530, 140};
-    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"РўР•Р›Рћ", 530, 140};
+    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140};
+    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Хвост", 530, 140};
+    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"Копыта", 530, 140};
+    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Голова", 530, 140};
+    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Тело", 530, 140};
 
     MapObject vybor_pony[3];
-    vybor_pony[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Pony/pony1.bmp")};
-    vybor_pony[1] = {1000,200,1200,400,txLoadImage ("Pictures/Pony/pony2.bmp")};
-    vybor_pony[2] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/pony4.bmp")};
+    vybor_pony[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Pony/pony1.bmp"), 600, 400};
+    vybor_pony[1] = {1000,200,1200,400,txLoadImage ("Pictures/Pony/pony2.bmp"), 600, 400};
+    vybor_pony[2] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/pony4.bmp"), 600, 400};
     bool vid = false;
 
     MapObject vybor_chasti[2];
-    vybor_chasti[0] = {500, 100, 900, 500, txLoadImage ("Pictures/pony/unicorn.bmp")};
-    vybor_chasti[1] = {500, 100, 900, 300, txLoadImage ("Pictures/Head/Head.bmp")};
+    vybor_chasti[0] = {400, 100, 1000, 500, txLoadImage ("Pictures/pony/unicorn.bmp"), 600, 400};
+    vybor_chasti[1] = {400, 100, 640, 270, txLoadImage ("Pictures/Head/Head.bmp"), 280, 180};
     bool visible = false;
 
     while (!GetAsyncKeyState(VK_ESCAPE))
@@ -69,7 +69,7 @@ int main()
         txEnd();
     }
 
-    //РЈРґР°Р»РµРЅРёРµ РєР°СЂС‚РёРЅРѕРє
+    //Удаление картинок
     for (int i = 0; i <=2; i++)
     {
         txDeleteDC (vybor_pony[i].picture);
