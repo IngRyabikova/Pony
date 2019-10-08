@@ -7,8 +7,10 @@ struct MapObject
     int x2;
     int y2;
     HDC picture;
+    const char* Kategorya;
     int srk_width;
     int srk_height;
+    bool visible;
 
     void drawMapObject()
     {
