@@ -22,13 +22,14 @@ int main()
     vybor_pony[5] = {1000,400,1200,600,txLoadImage ("Pictures/Head/Head3.bmp"), "Хэд", 284, 219, true};
     char* Kategorya;
 
-    MapObject vybor_chasti[6];
-    vybor_chasti[0] = {400, 100, 1000, 500,txLoadImage ("Pictures/Pony/pony1.bmp"), "Пони", 600, 400, true};
-    vybor_chasti[1] = {400, 100, 1000, 500,txLoadImage ("Pictures/Pony/pony2.bmp"), "Пони", 600, 400, true};
-    vybor_chasti[2] = {400, 100, 1000, 500,txLoadImage ("Pictures/Pony/pony4.bmp"), "Пони", 600, 400, true};
-    vybor_chasti[3] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head1.bmp"), "Хэд", 259, 165, true};
-    vybor_chasti[4] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head2.bmp"), "Хэд", 253, 178, true};
-    vybor_chasti[5] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head3.bmp"), "Хэд", 284, 219, true};
+    const int COUNT_KAR = 6;
+    MapObject vybor_chasti[COUNT_KAR];
+    vybor_chasti[0] = {400, 100, 1000, 500,txLoadImage ("Pictures/Pony/pony1.bmp"), "Пони", 600, 400, false};
+    vybor_chasti[1] = {400, 100, 1000, 500,txLoadImage ("Pictures/Pony/pony2.bmp"), "Пони", 600, 400, false};
+    vybor_chasti[2] = {400, 100, 1000, 500,txLoadImage ("Pictures/Pony/pony4.bmp"), "Пони", 600, 400, false};
+    vybor_chasti[3] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head1.bmp"), "Хэд", 259, 165, false};
+    vybor_chasti[4] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head2.bmp"), "Хэд", 253, 178, false};
+    vybor_chasti[5] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head3.bmp"), "Хэд", 284, 219, false};
     bool visible = false;
 
     while (!GetAsyncKeyState(VK_ESCAPE))
@@ -50,7 +51,7 @@ int main()
             }
         }
 
-        for (int i = 0; i <=2; i++)
+        for (int i = 0; i <=COUNT_KAR; i++)
         {
             if(vybor_chasti[i].visible)
             {
@@ -70,9 +71,9 @@ int main()
             txSleep(200);
         }
 
-        for (int i = 0; i <=5; i++)
+        for (int i = 0; i <=COUNT_KAR; i++)
         {
-            if (vybor_pony [i].Click())
+            if (vybor_pony [i].Click() and vybor_pony[i].Kategorya == Kategorya)
             {
                 vybor_chasti[i].visible = !vybor_chasti[i].visible;
                 txSleep(200);
