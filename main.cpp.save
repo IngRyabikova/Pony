@@ -33,9 +33,9 @@ int main()
     vybor_chasti[3] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head1.bmp"), "Хэд", 259, 165, false};
     vybor_chasti[4] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head2.bmp"), "Хэд", 253, 178, false};
     vybor_chasti[5] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head3.bmp"), "Хэд", 284, 219, false};
-    vybor_chasti[6] = {750, 250, 990, 420,txLoadImage ("Pictures/xvost/xvost1.bmp"), "Хвост", 230, 250, false};
-    vybor_chasti[7] = {750, 250, 990, 420,txLoadImage ("Pictures/xvost/xvost2.bmp"), "Хвост", 230, 250, false};
-    vybor_chasti[8] = {750, 250, 990, 420,txLoadImage ("Pictures/xvost/xvost3.bmp"), "Хвост", 230, 250, false};
+    vybor_chasti[6] = {700, 300, 940, 470,txLoadImage ("Pictures/xvost/xvost1.bmp"), "Хвост", 230, 250, false};
+    vybor_chasti[7] = {400, 100, 640, 270,txLoadImage ("Pictures/xvost/xvost2.bmp"), "Хвост", 230, 250, false};
+    vybor_chasti[8] = {400, 100, 640, 270,txLoadImage ("Pictures/xvost/xvost3.bmp"), "Хвост", 230, 250, false};
     bool visible = false;
 
     while (!GetAsyncKeyState(VK_ESCAPE))
