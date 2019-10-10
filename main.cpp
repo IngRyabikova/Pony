@@ -48,32 +48,37 @@ int main()
     {
     txCreateWindow(1200, 700);
 
-    const int COUNT_BUTT = 6;
+    const int COUNT_BUTT = 5;
     MenuButton buttons[COUNT_BUTT];
-    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"œÓÌË", 530, 140};
-    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"’‚ÓÒÚ", 530, 140};
-    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270," ÓÔ˚Ú‡", 530, 140};
-    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"√ÓÎÓ‚‡", 530, 140};
-    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"“ÂÎÓ", 530, 140};
+    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"√è√Æ√≠√®", 530, 140};
+    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"√ï√¢√Æ√±√≤", 530, 140};
+    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"√ä√Æ√Ø√ª√≤√†", 530, 140};
+    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"√É√Æ√´√Æ√¢√†", 530, 140};
+    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"√í√•√´√Æ", 530, 140};
 
-    const int COUNT_KAR = 6;
+    const int COUNT_KAR = 9;
     MapObject vybor_pony[COUNT_KAR];
-    vybor_pony[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Pony/pony1.bmp"), "œÓÌË", 600, 400, true};
-    vybor_pony[1] = {1000,200,1200,400,txLoadImage ("Pictures/Pony/pony2.bmp"), "œÓÌË", 600, 400, true};
-    vybor_pony[2] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/pony4.bmp"), "œÓÌË", 600, 400, true};
-    vybor_pony[3] = {1000,  0,1200,200,txLoadImage ("Pictures/Head/Head1.bmp"), "’˝‰", 259, 165, true};
-    vybor_pony[4] = {1000,200,1200,400,txLoadImage ("Pictures/Head/Head2.bmp"), "’˝‰", 253, 178, true};
-    vybor_pony[5] = {1000,400,1200,600,txLoadImage ("Pictures/Head/Head3.bmp"), "’˝‰", 284, 219, true};
+    vybor_pony[0] = {1000,  0,1200,200,txLoadImage ("Pictures/Pony/pony1.bmp"), "√è√Æ√≠√®", 600, 400, true};
+    vybor_pony[1] = {1000,200,1200,400,txLoadImage ("Pictures/Pony/pony2.bmp"), "√è√Æ√≠√®", 600, 400, true};
+    vybor_pony[2] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/pony4.bmp"), "√è√Æ√≠√®", 600, 400, true};
+    vybor_pony[3] = {1000,  0,1200,200,txLoadImage ("Pictures/Head/Head1.bmp"), "√ï√Ω√§", 259, 165, true};
+    vybor_pony[4] = {1000,200,1200,400,txLoadImage ("Pictures/Head/Head2.bmp"), "√ï√Ω√§", 253, 178, true};
+    vybor_pony[5] = {1000,400,1200,600,txLoadImage ("Pictures/Head/Head3.bmp"), "√ï√Ω√§", 284, 219, true};
+    vybor_pony[6] = {1000,  0,1200,200,txLoadImage ("Pictures/xvost/xvost1.bmp"), "√ï√¢√Æ√±√≤", 230, 250, true};
+    vybor_pony[7] = {1000,200,1200,400,txLoadImage ("Pictures/xvost/xvost2.bmp"), "√ï√¢√Æ√±√≤", 230, 250, true};
+    vybor_pony[8] = {1000,400,1200,600,txLoadImage ("Pictures/xvost/xvost3.bmp"), "√ï√¢√Æ√±√≤", 230, 250, true};
     char* Kategorya;
 
     MapObject vybor_chasti[COUNT_KAR];
-    vybor_chasti[0] = {480, 100, 1080, 500,txLoadImage ("Pictures/Pony/pony1.bmp"), "œÓÌË", 600, 400, false};
-    vybor_chasti[1] = {400, 100, 1000, 500,txLoadImage ("Pictures/Pony/pony2.bmp"), "œÓÌË", 600, 400, false};
-    vybor_chasti[2] = {400, 100, 1000, 500,txLoadImage ("Pictures/Pony/pony4.bmp"), "œÓÌË", 600, 400, false};
-    vybor_chasti[3] = {500, 100, 740, 280,txLoadImage ("Pictures/Head/Head1.bmp"), "’˝‰", 259, 165, false};//400, 100, 640, 270
-    vybor_chasti[4] = {500, 100, 740, 280,txLoadImage ("Pictures/Head/Head2.bmp"), "’˝‰", 253, 178, false};
-    vybor_chasti[5] = {500, 100, 740, 280,txLoadImage ("Pictures/Head/Head3.bmp"), "’˝‰", 284, 219, false};
-    bool visible = false;
+    vybor_chasti[0] = {480, 100, 1080, 500,txLoadImage ("Pictures/Pony/pony1.bmp"), "√è√Æ√≠√®", 600, 400, false};
+    vybor_chasti[1] = {400, 100, 1000, 500,txLoadImage ("Pictures/Pony/pony2.bmp"), "√è√Æ√≠√®", 600, 400, false};
+    vybor_chasti[2] = {400, 100, 1000, 500,txLoadImage ("Pictures/Pony/pony4.bmp"), "√è√Æ√≠√®", 600, 400, false};
+    vybor_chasti[3] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head1.bmp"), "√ï√Ω√§", 259, 165, false};
+    vybor_chasti[4] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head2.bmp"), "√ï√Ω√§", 253, 178, false};
+    vybor_chasti[5] = {400, 100, 640, 270,txLoadImage ("Pictures/Head/Head3.bmp"), "√ï√Ω√§", 284, 219, false};
+    vybor_chasti[6] = {750, 250, 990, 420,txLoadImage ("Pictures/xvost/xvost1.bmp"), "√ï√¢√Æ√±√≤", 230, 250, false};
+    vybor_chasti[7] = {750, 250, 990, 420,txLoadImage ("Pictures/xvost/xvost2.bmp"), "√ï√¢√Æ√±√≤", 230, 250, false};
+    vybor_chasti[8] = {750, 250, 990, 420,txLoadImage ("Pictures/xvost/xvost3.bmp"), "√ï√¢√Æ√±√≤", 230, 250, false};
 
     while (!GetAsyncKeyState(VK_ESCAPE))
     {
@@ -81,37 +86,38 @@ int main()
         txSetFillColor(TX_GREEN);
         txClear();
 
-        risyemKnopki (5, buttons) ;
-
-        risyemKPony (6, Kategorya, vybor_pony);
-
-        risyemChasti (6, vybor_chasti) ;
+        risyemKnopki (COUNT_BUTT, buttons) ;
+        risyemKPony (COUNT_KAR, Kategorya, vybor_pony);
+        risyemChasti (COUNT_KAR, vybor_chasti) ;
 
         if (buttons [3].Click())
         {
-            Kategorya = "’˝‰";
+            Kategorya = "√ï√Ω√§";
             txSleep(200);
         }
 
         if (buttons [0].Click())
         {
-            Kategorya = "œÓÌË";
+            Kategorya = "√è√Æ√≠√®";
             txSleep(200);
         }
 
-        risyemKChasti (6, Kategorya, vybor_pony, vybor_chasti);
+        if (buttons [1].Click())
+        {
+            Kategorya = "√ï√¢√Æ√±√≤";
+            txSleep(200);
+        }
+
+        risyemKChasti (COUNT_KAR, Kategorya, vybor_pony, vybor_chasti);
 
         txSleep(10);
         txEnd();
     }
 
-    //”‰‡ÎÂÌËÂ Í‡ÚËÌÓÍ
-    for (int i = 0; i <=5; i++)
+    //Delete pictures
+    for (int i = 0; i <=COUNT_KAR; i++)
     {
         txDeleteDC (vybor_pony[i].picture);
-    }
-    for (int i = 0; i <=1; i++)
-    {
         txDeleteDC (vybor_chasti[i].picture);
     }
 
