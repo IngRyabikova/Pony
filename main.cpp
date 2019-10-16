@@ -60,6 +60,8 @@ int main()
     {
     txCreateWindow(1200, 700);
 
+    txPlaySound("Pony.wav", SND_LOOP );
+
     const int COUNT_BUTT = 5;
     MenuButton buttons[COUNT_BUTT];
     buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140};
@@ -85,6 +87,7 @@ int main()
     vybor_pony[12] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/unicorn.bmp"), "Pony", 600, 400, true};
     char* Kategorya;
 
+    int nomer_kartinki = -1000;
 
     MapObject vybor_chasti[COUNT_KAR];
     vybor_chasti[0] = {400, 100, 1080, 500,txLoadImage ("Pictures/Pony/pony1.bmp"), "Pony", 600, 400, false};
@@ -143,6 +146,52 @@ int main()
 
         risyemKChasti (COUNT_KAR, Kategorya, vybor_pony, vybor_chasti);
 
+        for(int i = 0; i < COUNT_KAR; i++)
+        {
+          if ( vybor_chasti[i].visible && vybor_chasti[i].Click())
+          {
+              nomer_kartinki = i;
+
+          }
+
+        }
+
+        if (nomer_kartinki >= 0 && GetAsyncKeyState(VK_LEFT))
+           {
+             vybor_chasti[nomer_kartinki].x -= 3;
+             vybor_chasti[nomer_kartinki].x2 -= 3;
+           }
+        if (nomer_kartinki >= 0 && GetAsyncKeyState(VK_RIGHT))
+           {
+             vybor_chasti[nomer_kartinki].x += 3;
+             vybor_chasti[nomer_kartinki].x2 += 3;
+           }
+         if (nomer_kartinki >= 0 && GetAsyncKeyState(VK_UP))
+           {
+             vybor_chasti[nomer_kartinki].y -= 3;
+             vybor_chasti[nomer_kartinki].y2 -= 3;
+           }
+        if (nomer_kartinki >= 0 && GetAsyncKeyState(VK_DOWN))
+           {
+             vybor_chasti[nomer_kartinki].y += 3;
+             vybor_chasti[nomer_kartinki].y2 += 3;
+           }
+        if (nomer_kartinki >= 0 && GetAsyncKeyState(VK_OEM_MINUS))
+           {
+             vybor_chasti[nomer_kartinki].x2 = vybor_chasti[nomer_kartinki].x +
+             (vybor_chasti[nomer_kartinki].x2-vybor_chasti[nomer_kartinki].x)*0.99;
+             vybor_chasti[nomer_kartinki].y2 = vybor_chasti[nomer_kartinki].y +
+             (vybor_chasti[nomer_kartinki].y2-vybor_chasti[nomer_kartinki].y)*0.99;
+           }
+        if (nomer_kartinki >= 0 && GetAsyncKeyState(VK_OEM_PLUS))
+           {
+            vybor_chasti[nomer_kartinki].x2 = vybor_chasti[nomer_kartinki].x +
+             (vybor_chasti[nomer_kartinki].x2-vybor_chasti[nomer_kartinki].x)*1.01;
+            vybor_chasti[nomer_kartinki].y2 = vybor_chasti[nomer_kartinki].y +
+             (vybor_chasti[nomer_kartinki].y2-vybor_chasti[nomer_kartinki].y)*1.01;
+           }
+
+
         txSleep(10);
         txEnd();
     }
@@ -156,32 +205,5 @@ int main()
 
 
 
-
-
-    /* for (int a = 0; a < COUNT_PICS; a++)
-        {
-            if (txMouseButtons() == 1 &&
-                txMouseX() > pic[a].x &&
-                txMouseX() < pic[a].x + pic[a].shirina &&
-                txMouseY() > pic[a].y &&
-                txMouseY() < pic[a].y + pic[a].visota &&
-                (pic[a].category == category || pic[a].category == category2))
-            {
-                mapParts[a].visible = !mapParts[a].visible;
-
-                for (int n = 0; n < COUNT_PICS; n++)
-                {
-                    if (mapParts[a].visible &&
-                        a != n &&
-                        pic[n].category == pic[a].category)
-                    {
-                        mapParts[n].visible = false;
-                    }
-                }
-
-                txSleep(200);
-            }
-        }
-         */
     return 0;
 }
