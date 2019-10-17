@@ -83,8 +83,8 @@ int main()
     vybor_pony[10] = {1000,200,1200,400,txLoadImage ("Pictures/kopta/kopta2.bmp"), "kopta", 252, 60, true};
     vybor_pony[11] = {1000,400,1200,600,txLoadImage ("Pictures/kopta/kopta3.bmp"), "kopta", 142, 59, true};
     vybor_pony[12] = {1000,400,1200,600,txLoadImage ("Pictures/Pony/unicorn.bmp"), "Pony", 600, 400, true};
-    char* Kategorya;
 
+    char* Kategorya;
 
     MapObject vybor_chasti[COUNT_KAR];
     vybor_chasti[0] = {400, 100, 1080, 500,txLoadImage ("Pictures/Pony/pony1.bmp"), "Pony", 600, 400, false};
@@ -96,10 +96,12 @@ int main()
     vybor_chasti[6] = {750, 250, 990, 420,txLoadImage ("Pictures/xvost/xvost1.bmp"), "Xvost", 230, 250, false};
     vybor_chasti[7] = {750, 250, 990, 420,txLoadImage ("Pictures/xvost/xvost2.bmp"), "Xvost", 230, 250, false};
     vybor_chasti[8] = {750, 250, 990, 420,txLoadImage ("Pictures/xvost/xvost3.bmp"), "Xvost", 230, 250, false};
-    vybor_chasti[9] = {550, 400,800,500,txLoadImage ("Pictures/kopta/kopta1.bmp"), "kopta", 189, 49, false};
+    vybor_chasti[9] = {550, 400,800, 500,txLoadImage ("Pictures/kopta/kopta1.bmp"), "kopta", 189, 49, false};
     vybor_chasti[10] = {550, 400,800,500,txLoadImage ("Pictures/kopta/kopta2.bmp"), "kopta", 252, 60, false};
     vybor_chasti[11] = {550, 400,800,500,txLoadImage ("Pictures/kopta/kopta3.bmp"), "kopta", 142, 59, false};
     vybor_chasti[12] = {400,100,1000,500,txLoadImage ("Pictures/Pony/unicorn.bmp"), "Pony", 600, 400, false};
+
+    int nKartinki = -100;
 
     while (!GetAsyncKeyState(VK_ESCAPE))
     {
@@ -135,7 +137,7 @@ int main()
             txSleep(200);
         }
 
-            if (buttons [4].Click())
+        if (buttons [4].Click())
         {
             Kategorya = "Telo";
             txSleep(200);
@@ -143,7 +145,53 @@ int main()
 
         risyemKChasti (COUNT_KAR, Kategorya, vybor_pony, vybor_chasti);
 
-        txSleep(10);
+        for (int i = 0; i <= COUNT_KAR; i++)
+        {
+            if (vybor_chasti[i].Click() && vybor_chasti[i].visible)
+            {
+                nKartinki = i;
+            }
+        }
+
+        if (GetAsyncKeyState(VK_OEM_PLUS) && nKartinki >= 0)
+        {
+            vybor_chasti[nKartinki].x2 +=3;
+            vybor_chasti[nKartinki].y2 +=3;
+        }
+
+        if (GetAsyncKeyState(VK_OEM_MINUS) && nKartinki >= 0)
+        {
+            vybor_chasti[nKartinki].x2 -=3;
+            vybor_chasti[nKartinki].y2 -=3;
+        }
+
+        if (GetAsyncKeyState(VK_LEFT)  && nKartinki >= 0)
+        {
+            vybor_chasti[nKartinki].x  -=3;
+            vybor_chasti[nKartinki].x2 -=3;
+        }
+
+        if (GetAsyncKeyState(VK_RIGHT) && nKartinki >= 0)
+        {
+            vybor_chasti[nKartinki].x  +=3;
+            vybor_chasti[nKartinki].x2 +=3;
+        }
+
+        if (GetAsyncKeyState(VK_DOWN)    && nKartinki >= 0)
+        {
+            vybor_chasti[nKartinki].y  +=3;
+            vybor_chasti[nKartinki].y2 +=3;
+        }
+
+
+        if (GetAsyncKeyState(VK_UP)  && nKartinki >= 0)
+        {
+            vybor_chasti[nKartinki].y  -=3;
+            vybor_chasti[nKartinki].y2 -=3;
+        }
+
+
+        txSleep(20);
         txEnd();
     }
 
