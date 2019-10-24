@@ -11,6 +11,7 @@ struct MapObject
     int srk_width;
     int srk_height;
     bool visible;
+    bool najatieKartinki;
 
     void drawMapObject()
     {

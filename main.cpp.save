@@ -174,10 +174,10 @@ int main()
                 int width = vybor_chasti[i].x2 - vybor_chasti[i].x;
                 int hight = vybor_chasti[i].y2 - vybor_chasti[i].y;
 
-                vybor_chasti[i].x = txMouseX() - width/2;
+                vybor_chasti[i].x = txMouseX() - 30;
                 vybor_chasti[i].x2 = vybor_chasti[i].x + width;
 
-                vybor_chasti[i].y = txMouseY() - hight/2;
+                vybor_chasti[i].y = txMouseY() - 30;
                 vybor_chasti[i].y2 = vybor_chasti[i].y + hight;
             }
 
