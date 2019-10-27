@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Button.cpp" />
+		<Unit filename="Files.cpp" />
 		<Unit filename="MapObjects.cpp" />
 		<Unit filename="TXLib.h" />
 		<Unit filename="main.cpp" />

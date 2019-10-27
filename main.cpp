@@ -1,7 +1,7 @@
 #include "TXLib.h"
 #include "Button.cpp"
 #include "MapObjects.cpp"
-#include "main1.cpp"
+#include "Files.cpp"
 
 void risyemKChasti (int COUNT_KAR, char* Kategorya, MapObject vybor_pony[], MapObject vybor_chasti[])
 {
@@ -58,7 +58,7 @@ void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
 }
 
 int main()
-    {
+{
     txCreateWindow(1200, 700);
 
     txPlaySound("Pony.wav", SND_LOOP );
@@ -101,7 +101,7 @@ int main()
     int nomer_kartinki = -1000;
 
     MapObject vybor_chasti[COUNT_KAR];
-    vybor_chasti[0] = {400, 100, 1080, 500};
+    vybor_chasti[0] = {400, 100, 1000, 500};
     vybor_chasti[1] = {400, 100, 1000, 500};
     vybor_chasti[2] = {400, 100, 1000, 500};
     vybor_chasti[3] = {500, 100, 740, 270};
@@ -158,7 +158,7 @@ int main()
             txSleep(200);
         }
 
-            if (buttons [4].Click())
+        if (buttons [4].Click())
         {
             Kategorya = "Telo";
             txSleep(200);
@@ -168,14 +168,14 @@ int main()
         {
            int width = vybor_chasti[i].x2 - vybor_chasti[i].x;
 
-            if (vybor_chasti[i].x < 200)
+            if (vybor_chasti[i].x < 300)
             {
-                vybor_chasti[i].x = 200;
+                vybor_chasti[i].x = 300;
                 vybor_chasti[i].x2 = vybor_chasti[i].x + width;
             }
-            if (vybor_chasti[i].x2 > 800)
+            if (vybor_chasti[i].x2 > 1100)
             {
-                vybor_chasti[i].x2 = 800;
+                vybor_chasti[i].x2 = 1100;
                 vybor_chasti[i].x = vybor_chasti[i].x2 - width;
             }
         }
