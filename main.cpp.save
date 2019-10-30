@@ -152,7 +152,7 @@ int main()
             selected_category = buttons[2].Kategorya; //"kopta";
             txSleep(200);
         }
-
+        
         if (buttons [3].Click())
         {
             selected_category = buttons[3].Kategorya;//"Head";
