@@ -12,6 +12,7 @@ struct MenuButton
     const char* text;
     int shirina;
     int vysota;
+    char* Kategorya;
 
     void drawButton()
     {

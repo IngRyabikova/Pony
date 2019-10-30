@@ -134,33 +134,34 @@ int main()
         risyemKPony (COUNT_KAR, selected_category, variants);
         risyemChasti (COUNT_KAR, chasti) ;
 
-        if (buttons [3].Click())
-        {
-            selected_category = buttons[3].category;//"Head";
-            txSleep(200);
-        }
 
         if (buttons [0].Click())
         {
-            selected_category = buttons[0].category; //"Pony";
+            selected_category = buttons[0].Kategorya; //"Pony";
             txSleep(200);
         }
 
         if (buttons [1].Click())
         {
-            selected_category = buttons[1].category; //"Xvost";
+            selected_category = buttons[1].Kategorya; //"Xvost";
             txSleep(200);
         }
 
         if (buttons [2].Click())
         {
-            selected_category = buttons[2].category; //"kopta";
+            selected_category = buttons[2].Kategorya; //"kopta";
+            txSleep(200);
+        }
+
+        if (buttons [3].Click())
+        {
+            selected_category = buttons[3].Kategorya;//"Head";
             txSleep(200);
         }
 
         if (buttons [4].Click())
         {
-            selected_category = buttons[4].category;//"Telo";
+            selected_category = buttons[4].Kategorya;//"Telo";
             txSleep(200);
         }
 
