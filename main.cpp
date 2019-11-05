@@ -3,7 +3,7 @@
 #include "MapObjects.cpp"
 #include "Files.cpp"
 
-void risyemKChasti (int COUNT_KAR, char* selected_category, MapObject vybor_pony[], MapObject chasti[])
+void risyemKChasti (int COUNT_KAR, string selected_category, MapObject vybor_pony[], MapObject chasti[])
 {
     for (int i = 0; i < COUNT_KAR; i++)
      {
@@ -38,7 +38,7 @@ void risyemChasti (int COUNT_KAR, MapObject chasti[])
         }
 }
 
-void risyemKPony (int COUNT_KAR, char* selected_category, MapObject vybor_pony[])
+void risyemKPony (int COUNT_KAR, string selected_category, MapObject vybor_pony[])
 {
     for (int i = 0; i < COUNT_KAR; i++)
         {
@@ -66,7 +66,7 @@ int main()
     const int COUNT_BUTT = 5;
     MenuButton buttons[COUNT_BUTT];
     buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140, "Pony"};
-    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Хвост", 530, 140, "Xvost"};
+    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Хвост", 530, 140, "xvost"};
     buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"Копыта", 530, 140, "kopta"};
     buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Голова", 530, 140, "Head"};
     buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Тело", 530, 140, "Telo"};
@@ -76,19 +76,24 @@ int main()
     variants[0] = {1000,  0,1200,200,"Pictures/Pony/pony1.bmp", "Pony"};
     variants[1] = {1000,200,1200,400,"Pictures/Pony/pony2.bmp", "Pony"};
     variants[2] = {1000,400,1200,600,"Pictures/Pony/pony4.bmp", "Telo"};
-    variants[3] = {1000,  0,1200,200,"Pictures/Head/Head1.bmp", "Head"};
+    variants[3] = {1000,  0,1200,200,"Pictures/Head/Head1.bmp"};
     variants[4] = {1000,200,1200,400,"Pictures/Head/Head2.bmp", "Head"};
     variants[5] = {1000,400,1200,600,"Pictures/Head/Head3.bmp", "Head"};
-    variants[6] = {1000,  0,1200,200,"Pictures/xvost/xvost1.bmp", "Xvost"};
-    variants[7] = {1000,200,1200,400,"Pictures/xvost/xvost2.bmp", "Xvost"};
-    variants[8] = {1000,400,1200,600,"Pictures/xvost/xvost3.bmp", "Xvost"};
+    variants[6] = {1000,  0,1200,200,"Pictures/xvost/xvost1.bmp", "xvost"};
+    variants[7] = {1000,200,1200,400,"Pictures/xvost/xvost2.bmp", "xvost"};
+    variants[8] = {1000,400,1200,600,"Pictures/xvost/xvost3.bmp", "xvost"};
     variants[9] = {1000,  0,1200,200,"Pictures/kopta/kopta1.bmp", "kopta"};
     variants[10] = {1000,200,1200,400,"Pictures/kopta/kopta2.bmp", "kopta"};
     variants[11] = {1000,400,1200,600,"Pictures/kopta/kopta3.bmp", "kopta"};
-    variants[12] = {1000,400,1200,600,"Pictures/Pony/unicorn.bmp", "Pony"};
+    variants[12] = {1000,400,1200,600,"Pictures/Pony/unicorn.bmp"};
 
     for (int i = 0; i < COUNT_KAR; i++)
     {
+        string stroka = variants[i].adress;
+        int onepose = stroka.find("/");
+        int twopose = stroka.find("/", onepose + 1);
+        variants[i].Kategorya = stroka.substr(onepose + 1, twopose - onepose - 1);
+
         variants[i].picture = txLoadImage(variants[i].adress.c_str());
         variants[i].srk_width = get_widht(variants[i].adress);
         variants[i].srk_height = get_height(variants[i].adress);
@@ -96,7 +101,7 @@ int main()
     }
 
 
-    char* selected_category;
+    string selected_category;
 
     int nomer_vybrannoi_kartinki = -1000;
 
