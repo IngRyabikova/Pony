@@ -140,35 +140,16 @@ int main()
         risyemChasti (COUNT_KAR, chasti) ;
 
 
-        if (buttons [0].Click())
+
+        for (int i = 0; i < COUNT_BUTT; i = i + 1)
         {
-            selected_category = buttons[0].Kategorya; //"Pony";
-            txSleep(200);
+            if (buttons [i].Click())
+            {
+                selected_category = buttons[i].Kategorya;
+                txSleep(200);
+            }
         }
 
-        if (buttons [1].Click())
-        {
-            selected_category = buttons[1].Kategorya; //"Xvost";
-            txSleep(200);
-        }
-
-        if (buttons [2].Click())
-        {
-            selected_category = buttons[2].Kategorya; //"kopta";
-            txSleep(200);
-        }
-
-        if (buttons [3].Click())
-        {
-            selected_category = buttons[3].Kategorya;//"Head";
-            txSleep(200);
-        }
-
-        if (buttons [4].Click())
-        {
-            selected_category = buttons[4].Kategorya;//"Telo";
-            txSleep(200);
-        }
 
         for(int i = 0; i < COUNT_KAR; i++)
         {
