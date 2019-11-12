@@ -2,6 +2,10 @@
 #include "Button.cpp"
 #include "MapObjects.cpp"
 #include "Files.cpp"
+#include <fstream>
+#include <string>
+
+using namespace std;
 
 void risyemKChasti (int COUNT_KAR, string selected_category, MapObject vybor_pony[], MapObject chasti[])
 {
@@ -59,6 +63,24 @@ void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
 
 int main()
 {
+    setlocale(LC_ALL, "Russian");
+    string dlstroke;
+    string dlstroke2;
+    string dlstroke3;
+    string dlstroke4;
+    string dlstroke5;
+    ifstream file("C:\\Users\\user\\Desktop\\its a trap.txt");
+
+    getline(file, dlstroke);
+    getline(file, dlstroke2);
+    getline(file, dlstroke3);
+    getline(file, dlstroke4);
+    getline(file, dlstroke5);
+    file.close();
+
+
+
+
     txCreateWindow(1200, 700);
 
     txPlaySound("Pony.wav", SND_LOOP );
@@ -73,12 +95,12 @@ int main()
 
     const int COUNT_KAR = 13;
     MapObject variants[COUNT_KAR];
-    variants[0] = {1000,  0,1200,200,"Pictures/Pony/pony1.bmp", "Pony"};
-    variants[1] = {1000,200,1200,400,"Pictures/Pony/pony2.bmp", "Pony"};
-    variants[2] = {1000,400,1200,600,"Pictures/Pony/pony4.bmp", "Telo"};
-    variants[3] = {1000,  0,1200,200,"Pictures/Head/Head1.bmp"};
-    variants[4] = {1000,200,1200,400,"Pictures/Head/Head2.bmp", "Head"};
-    variants[5] = {1000,400,1200,600,"Pictures/Head/Head3.bmp", "Head"};
+    variants[0] = {atoi(dlstroke.c_str()),  0,1200,200,"Pictures/Pony/pony1.bmp", "Pony"};
+    variants[1] = {atoi(dlstroke2.c_str()),200,1200,400,"Pictures/Pony/pony2.bmp", "Pony"};
+    variants[2] = {atoi(dlstroke3.c_str()),400,1200,600,"Pictures/Pony/pony4.bmp", "Telo"};
+    variants[3] = {atoi(dlstroke5.c_str()),  0,1200,200,"Pictures/Head/Head1.bmp"};
+    variants[4] = {atoi(dlstroke3.c_str()),200,1200,400,"Pictures/Head/Head2.bmp", "Head"};
+    variants[5] = {atoi(dlstroke4.c_str()),400,1200,600,"Pictures/Head/Head3.bmp", "Head"};
     variants[6] = {1000,  0,1200,200,"Pictures/xvost/xvost1.bmp", "xvost"};
     variants[7] = {1000,200,1200,400,"Pictures/xvost/xvost2.bmp", "xvost"};
     variants[8] = {1000,400,1200,600,"Pictures/xvost/xvost3.bmp", "xvost"};
