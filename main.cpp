@@ -100,22 +100,25 @@ int main()
 
     const int COUNT_KAR = 13;
     MapObject variants[COUNT_KAR];
-    variants[0] = {atoi(stroka2.c_str()),  0,1200,200,stroka, "Pony"};
-    variants[1] = {1000,atoi(stroka3.c_str()),1200,400,"Pictures/Pony/pony2.bmp", "Pony"};
-    variants[2] = {1000,400,atoi(stroka4.c_str()),600,"Pictures/Telo/pony4.bmp", "Telo"};
-    variants[3] = {1000,  0,1200,200,"Pictures/Head/Head1.bmp", stroka6};
-    variants[4] = {1000,200,1200,atoi(stroka5.c_str()),"Pictures/Head/Head2.bmp", stroka6};
-    variants[5] = {1000,400,1200,600,"Pictures/Head/Head3.bmp", "Head"};
-    variants[6] = {1000,  0,1200,200,"Pictures/xvost/xvost1.bmp", "xvost"};
-    variants[7] = {1000,200,1200,400,"Pictures/xvost/xvost2.bmp", "xvost"};
-    variants[8] = {1000,400,1200,600,"Pictures/xvost/xvost3.bmp", "xvost"};
-    variants[9] = {1000,  0,1200,200,"Pictures/kopta/kopta1.bmp", "kopta"};
-    variants[10] = {1000,200,1200,400,"Pictures/kopta/kopta2.bmp", "kopta"};
-    variants[11] = {1000,400,1200,600,"Pictures/kopta/kopta3.bmp", "kopta"};
-    variants[12] = {1000,400,1200,600,"Pictures/Pony/unicorn.bmp"};
+    variants[0] = {  0,"Pictures/Pony/pony1.bmp"};
+    variants[1] = {200,"Pictures/Pony/pony2.bmp"};
+    variants[2] = {400,"Pictures/Telo/pony4.bmp"};
+    variants[3] = {  0,"Pictures/Head/Head1.bmp"};
+    variants[4] = {200,"Pictures/Head/Head2.bmp"};
+    variants[5] = {400,"Pictures/Head/Head3.bmp"};
+    variants[6] = {  0,"Pictures/xvost/xvost1.bmp"};
+    variants[7] = {200,"Pictures/xvost/xvost2.bmp"};
+    variants[8] = {400,"Pictures/xvost/xvost3.bmp"};
+    variants[9] = {  0,"Pictures/kopta/kopta1.bmp"};
+    variants[10] = {200,"Pictures/kopta/kopta2.bmp"};
+    variants[11] = {400,"Pictures/kopta/kopta3.bmp"};
+    variants[12] = {400,"Pictures/Pony/unicorn.bmp"};
 
     for (int i = 0; i < COUNT_KAR; i++)
     {
+        variants[i].x = 1000;
+        variants[i].x2 = 1200;
+        variants[i].y2 = variants[i].y + 200;
         string stroka = variants[i].adress;
         int onepose = stroka.find("/");
         int twopose = stroka.find("/", onepose + 1);
@@ -133,27 +136,48 @@ int main()
     int nomer_vybrannoi_kartinki = -1000;
 
     MapObject chasti[COUNT_KAR];
-    chasti[0] = {400, 100, 1000, 500};
-    chasti[1] = {400, 100, 1000, 500};
-    chasti[2] = {400, 100, 1000, 500};
-    chasti[3] = {500, 100, 740, 270};
-    chasti[4] = {500, 100, 740, 270};
-    chasti[5] = {500, 100, 740, 270};
-    chasti[6] = {750, 250, 990, 420};
-    chasti[7] = {750, 250, 990, 420};
-    chasti[8] = {750, 250, 990, 420};
-    chasti[9] = {550, 400,800,500};
-    chasti[10] = {550, 400,800,500};
-    chasti[11] = {550, 400,800,500};
-    chasti[12] = {400,100,1000,500};
 
     for (int i = 0; i < COUNT_KAR; i++)
     {
         chasti[i].picture = variants[i].picture;
+        chasti[i].adress = variants[i].adress;
         chasti[i].Kategorya = variants[i].Kategorya;
         chasti[i].srk_width = variants[i].srk_width;
         chasti[i].srk_height = variants[i].srk_height;
         chasti[i].visible = false;
+
+        if (chasti[i].Kategorya == "xvost")
+        {
+            chasti[i].x =  750;
+            chasti[i].y =  250;
+            chasti[i].x2 =  990;
+            chasti[i].y2 =  420;
+        }
+
+        if (chasti[i].Kategorya == "Pony" ||
+            chasti[i].Kategorya == "Telo")
+        {
+            chasti[i].x =  400;
+            chasti[i].y =  100;
+            chasti[i].x2 =  1000;
+            chasti[i].y2 =  500;
+        }
+
+        if (chasti[i].Kategorya == "Head")
+        {
+            chasti[i].x =  500;
+            chasti[i].y =  100;
+            chasti[i].x2 =  740;
+            chasti[i].y2 =  270;
+        }
+
+        if (chasti[i].Kategorya == "kopta")
+        {
+            chasti[i].x =  550;
+            chasti[i].y =  400;
+            chasti[i].x2 = 800;
+            chasti[i].y2 = 500;
+        }
     }
 
     while (!GetAsyncKeyState(VK_ESCAPE))

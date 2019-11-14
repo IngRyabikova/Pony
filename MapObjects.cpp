@@ -2,11 +2,11 @@
 
 struct MapObject
 {
-    int x;
     int y;
+    string adress;
+    int x;
     int x2;
     int y2;
-    string adress;
     string Kategorya;
     HDC picture;
     int srk_width;
