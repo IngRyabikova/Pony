@@ -65,22 +65,6 @@ void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    string stroka;
-    string stroka2;
-    string stroka3;
-    string stroka4;
-    string stroka5;
-    string stroka6;
-    ifstream file("Fail.txt");
-
-
-    getline(file, stroka);
-    getline(file, stroka2);
-    getline(file, stroka3);
-    getline(file, stroka4);
-    getline(file, stroka5);
-    getline(file, stroka6);
-    file.close();
 
 
 
@@ -89,22 +73,24 @@ int main()
 
     txPlaySound("Pony.wav", SND_LOOP );
 
-    const int COUNT_BUTT = 6;
+    const int COUNT_BUTT = 8;
     MenuButton buttons[COUNT_BUTT];
     buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140, "Pony"};
     buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Хвост", 530, 140, "xvost"};
     buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"Копыта", 530, 140, "kopta"};
     buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Голова", 530, 140, "Head"};
     buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Тело", 530, 140, "Telo"};
-    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Справка", 530, 140};
+    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Справка", 530, 140,""};
+    buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Сохранить", 530, 140,""};
+    buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Загрузить", 530, 140,""};
 
     const int COUNT_KAR = 13;
     MapObject variants[COUNT_KAR];
-    variants[0] = {atoi(stroka2.c_str()),  0,1200,200,stroka, "Pony"};
-    variants[1] = {1000,atoi(stroka3.c_str()),1200,400,"Pictures/Pony/pony2.bmp", "Pony"};
-    variants[2] = {1000,400,atoi(stroka4.c_str()),600,"Pictures/Telo/pony4.bmp", "Telo"};
-    variants[3] = {1000,  0,1200,200,"Pictures/Head/Head1.bmp", stroka6};
-    variants[4] = {1000,200,1200,atoi(stroka5.c_str()),"Pictures/Head/Head2.bmp", stroka6};
+    variants[0] = {1000,  0,1200,200,"Pictures/Pony/pony1.bmp", "Pony"};
+    variants[1] = {1000,200,1200,400,"Pictures/Pony/pony2.bmp", "Pony"};
+    variants[2] = {1000,400,1200,600,"Pictures/Telo/pony4.bmp", "Telo"};
+    variants[3] = {1000,  0,1200,200,"Pictures/Head/Head1.bmp"};
+    variants[4] = {1000,200,1200,400,"Pictures/Head/Head2.bmp"};
     variants[5] = {1000,400,1200,600,"Pictures/Head/Head3.bmp", "Head"};
     variants[6] = {1000,  0,1200,200,"Pictures/xvost/xvost1.bmp", "xvost"};
     variants[7] = {1000,200,1200,400,"Pictures/xvost/xvost2.bmp", "xvost"};
@@ -150,11 +136,15 @@ int main()
     for (int i = 0; i < COUNT_KAR; i++)
     {
         chasti[i].picture = variants[i].picture;
+        chasti[i].adress = variants[i].adress;
         chasti[i].Kategorya = variants[i].Kategorya;
         chasti[i].srk_width = variants[i].srk_width;
         chasti[i].srk_height = variants[i].srk_height;
         chasti[i].visible = false;
     }
+
+
+
 
     while (!GetAsyncKeyState(VK_ESCAPE))
     {
@@ -197,9 +187,63 @@ int main()
         }
 
 
+        if (buttons[6].Click())//Сохранение
+        {
+
+            ofstream file1("Fail1.txt");
+
+            for (int nomer = 0; nomer < COUNT_KAR; nomer++)
+            {
+                if (chasti[nomer].visible)
+                {
+                    file1 << chasti[nomer].x << endl;
+                    file1 << chasti[nomer].y << endl;
+                    file1 << chasti[nomer].adress << endl;
+                }
+            }
+
+            file1.close();
+
+            txMessageBox("Сохранено в Fail1.txt");
+        }
+
+        else if (buttons[7].Click()) //Загрузка
+        {
+            string stroka;
+            string stroka2;
+            string adress;
+            ifstream file("Fail1.txt");
+
+            while (file.good())
+            {
+                getline(file, stroka);
+                if (stroka.size() > 1)
+                {
+                    getline(file, stroka2);
+                    getline(file, adress);
+
+                    txMessageBox(adress.c_str());
+
+                    for (int nomer = 0; nomer < COUNT_KAR; nomer++)
+                    {
+                        if (adress == chasti[nomer].adress)
+                        {
+                            chasti[nomer].visible = true;
+                            chasti[nomer].x = atoi(stroka.c_str());
+                            chasti[nomer].x2 = chasti[nomer].x + chasti[nomer].srk_width;
+                            chasti[nomer].y = atoi(stroka.c_str());
+                            chasti[nomer].y2 = chasti[nomer].y + chasti[nomer].srk_height;
+                        }
+                    }
+                }
+            }
+            file.close();
+         }
+
+
         for (int i = 0; i < COUNT_BUTT; i = i + 1)
         {
-            if (buttons [i].Click())
+            if (buttons [i].Click() && buttons[i].Kategorya != "")
             {
                 selected_category = buttons[i].Kategorya;
                 txSleep(200);
@@ -253,8 +297,6 @@ int main()
                 chasti[nomer_vybrannoi_kartinki].najatieKartinki = false;
             }
         }
-
-
 
 
         risyemKChasti (COUNT_KAR, selected_category, variants, chasti);
@@ -314,13 +356,20 @@ int main()
         txDeleteDC (chasti[i].picture);
     }
 
-    ofstream file1("Fail1.txt");
+   /* ofstream file1("Fail1.txt");
 
-    file1 << variants[0].Kategorya << endl;
-    file1 << chasti[12].x << endl;
+    for (int nomer = 0; nomer < COUNT_KAR; nomer++)
+    {
+        if (chasti[nomer].visible)
+        {
+            file1 << chasti[nomer].x << endl;
+            file1 << chasti[nomer].y << endl;
+            file1 << chasti[nomer].adress << endl;
+        }
+    }
 
 
-    file1.close();
+    file1.close();   */
 
 
     return 0;
