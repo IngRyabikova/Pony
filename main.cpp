@@ -65,22 +65,6 @@ void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    string stroka;
-    string stroka2;
-    string stroka3;
-    string stroka4;
-    string stroka5;
-    string stroka6;
-    ifstream file("Fail.txt");
-
-
-    getline(file, stroka);
-    getline(file, stroka2);
-    getline(file, stroka3);
-    getline(file, stroka4);
-    getline(file, stroka5);
-    getline(file, stroka6);
-    file.close();
 
 
 
@@ -89,14 +73,16 @@ int main()
 
     txPlaySound("Pony.wav", SND_LOOP );
 
-    const int COUNT_BUTT = 6;
+    const int COUNT_BUTT = 8;
     MenuButton buttons[COUNT_BUTT];
-    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"����", 530, 140, "Pony"};
-    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"�����", 530, 140, "xvost"};
-    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"������", 530, 140, "kopta"};
-    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"������", 530, 140, "Head"};
-    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"����", 530, 140, "Telo"};
-    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"�������", 530, 140};
+    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Ïîíè", 530, 140, "Pony"};
+    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Õâîñò", 530, 140, "xvost"};
+    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"Êîïûòà", 530, 140, "kopta"};
+    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Ãîëîâà", 530, 140, "Head"};
+    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Òåëî", 530, 140, "Telo"};
+    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Ñïðàâêà", 530, 140,""};
+    buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Ñîõðàíèòü", 530, 140,""};
+    buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Çàãðóçèòü", 530, 140,""};
 
     const int COUNT_KAR = 13;
     MapObject variants[COUNT_KAR];
@@ -180,6 +166,9 @@ int main()
         }
     }
 
+
+
+
     while (!GetAsyncKeyState(VK_ESCAPE))
     {
         txBegin();
@@ -200,12 +189,12 @@ int main()
             	txSetColor(TX_BLACK);
                 txRectangle (400, 100,800,500);
                 txDrawText(400, 100,800,500,
-                    "���\n"
+                    "ïðã\n"
                     "\n"
                     "\n"
-                    "���\n"
-                    "���\n"
-                    "���\n");
+                    "ïðã\n"
+                    "ïðã\n"
+                    "ïðã\n");
 
                 if (txMouseButtons() == 1 &&
                     txMouseX() > 400 &&
@@ -221,9 +210,63 @@ int main()
         }
 
 
+        if (buttons[6].Click())//Ñîõðàíåíèå
+        {
+
+            ofstream file1("Fail1.txt");
+
+            for (int nomer = 0; nomer < COUNT_KAR; nomer++)
+            {
+                if (chasti[nomer].visible)
+                {
+                    file1 << chasti[nomer].x << endl;
+                    file1 << chasti[nomer].y << endl;
+                    file1 << chasti[nomer].adress << endl;
+                }
+            }
+
+            file1.close();
+
+            txMessageBox("Ñîõðàíåíî â Fail1.txt");
+        }
+
+        else if (buttons[7].Click()) //Çàãðóçêà
+        {
+            string stroka;
+            string stroka2;
+            string adress;
+            ifstream file("Fail1.txt");
+
+            while (file.good())
+            {
+                getline(file, stroka);
+                if (stroka.size() > 1)
+                {
+                    getline(file, stroka2);
+                    getline(file, adress);
+
+                    txMessageBox(adress.c_str());
+
+                    for (int nomer = 0; nomer < COUNT_KAR; nomer++)
+                    {
+                        if (adress == chasti[nomer].adress)
+                        {
+                            chasti[nomer].visible = true;
+                            chasti[nomer].x = atoi(stroka.c_str());
+                            chasti[nomer].x2 = chasti[nomer].x + chasti[nomer].srk_width;
+                            chasti[nomer].y = atoi(stroka.c_str());
+                            chasti[nomer].y2 = chasti[nomer].y + chasti[nomer].srk_height;
+                        }
+                    }
+                }
+            }
+            file.close();
+         }
+
+
         for (int i = 0; i < COUNT_BUTT; i = i + 1)
         {
-            if (buttons [i].Click())
+            if (buttons [i].Click() && buttons[i].Kategorya != "")
             {
                 selected_category = buttons[i].Kategorya;
                 txSleep(200);
@@ -247,18 +290,12 @@ int main()
             }
         }
 
-
-
-        //for(/*int i*/ nomer_vybrannoi_kartinki = 0; nomer_vybrannoi_kartinki < COUNT_KAR; nomer_vybrannoi_kartinki++)
         if (nomer_vybrannoi_kartinki >= 0)
         {
             if (chasti[nomer_vybrannoi_kartinki].Click() and txGetPixel (txMouseX(), txMouseY()) != TX_GREEN)
             {
                 chasti[nomer_vybrannoi_kartinki].najatieKartinki = true;
             }
-
-            //if (txGetPixel (x, y) == TX_GREEN)
-
 
             if ((txMouseButtons() & 1) &&  chasti[nomer_vybrannoi_kartinki].najatieKartinki)
             {
@@ -277,8 +314,6 @@ int main()
                 chasti[nomer_vybrannoi_kartinki].najatieKartinki = false;
             }
         }
-
-
 
 
         risyemKChasti (COUNT_KAR, selected_category, variants, chasti);
@@ -337,15 +372,6 @@ int main()
         txDeleteDC (variants[i].picture);
         txDeleteDC (chasti[i].picture);
     }
-
-    ofstream file1("Fail1.txt");
-
-    file1 << variants[0].Kategorya << endl;
-    file1 << chasti[12].x << endl;
-
-
-    file1.close();
-
 
     return 0;
 }
