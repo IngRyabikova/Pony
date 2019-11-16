@@ -75,33 +75,36 @@ int main()
 
     const int COUNT_BUTT = 8;
     MenuButton buttons[COUNT_BUTT];
-    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140, "Pony"};
-    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Хвост", 530, 140, "xvost"};
-    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"Копыта", 530, 140, "kopta"};
-    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Голова", 530, 140, "Head"};
-    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Тело", 530, 140, "Telo"};
-    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Справка", 530, 140,""};
-    buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Сохранить", 530, 140,""};
-    buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Загрузить", 530, 140,""};
+    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"ГЏГ®Г­ГЁ", 530, 140, "Pony"};
+    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Г•ГўГ®Г±ГІ", 530, 140, "xvost"};
+    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"ГЉГ®ГЇГ»ГІГ ", 530, 140, "kopta"};
+    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"ГѓГ®Г«Г®ГўГ ", 530, 140, "Head"};
+    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Г’ГҐГ«Г®", 530, 140, "Telo"};
+    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Г‘ГЇГ°Г ГўГЄГ ", 530, 140,""};
+    buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Г‘Г®ГµГ°Г Г­ГЁГІГј", 530, 140,""};
+    buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Г‡Г ГЈГ°ГіГ§ГЁГІГј", 530, 140,""};
 
     const int COUNT_KAR = 13;
     MapObject variants[COUNT_KAR];
-    variants[0] = {1000,  0,1200,200,"Pictures/Pony/pony1.bmp", "Pony"};
-    variants[1] = {1000,200,1200,400,"Pictures/Pony/pony2.bmp", "Pony"};
-    variants[2] = {1000,400,1200,600,"Pictures/Telo/pony4.bmp", "Telo"};
-    variants[3] = {1000,  0,1200,200,"Pictures/Head/Head1.bmp"};
-    variants[4] = {1000,200,1200,400,"Pictures/Head/Head2.bmp"};
-    variants[5] = {1000,400,1200,600,"Pictures/Head/Head3.bmp", "Head"};
-    variants[6] = {1000,  0,1200,200,"Pictures/xvost/xvost1.bmp", "xvost"};
-    variants[7] = {1000,200,1200,400,"Pictures/xvost/xvost2.bmp", "xvost"};
-    variants[8] = {1000,400,1200,600,"Pictures/xvost/xvost3.bmp", "xvost"};
-    variants[9] = {1000,  0,1200,200,"Pictures/kopta/kopta1.bmp", "kopta"};
-    variants[10] = {1000,200,1200,400,"Pictures/kopta/kopta2.bmp", "kopta"};
-    variants[11] = {1000,400,1200,600,"Pictures/kopta/kopta3.bmp", "kopta"};
-    variants[12] = {1000,400,1200,600,"Pictures/Pony/unicorn.bmp"};
+    variants[0] = {  0,"Pictures/Pony/pony1.bmp"};
+    variants[1] = {200,"Pictures/Pony/pony2.bmp"};
+    variants[2] = {400,"Pictures/Telo/pony4.bmp"};
+    variants[3] = {  0,"Pictures/Head/Head1.bmp"};
+    variants[4] = {200,"Pictures/Head/Head2.bmp"};
+    variants[5] = {400,"Pictures/Head/Head3.bmp"};
+    variants[6] = {  0,"Pictures/xvost/xvost1.bmp"};
+    variants[7] = {200,"Pictures/xvost/xvost2.bmp"};
+    variants[8] = {400,"Pictures/xvost/xvost3.bmp"};
+    variants[9] = {  0,"Pictures/kopta/kopta1.bmp"};
+    variants[10] = {200,"Pictures/kopta/kopta2.bmp"};
+    variants[11] = {400,"Pictures/kopta/kopta3.bmp"};
+    variants[12] = {400,"Pictures/Pony/unicorn.bmp"};
 
     for (int i = 0; i < COUNT_KAR; i++)
     {
+        variants[i].x = 1000;
+        variants[i].x2 = 1200;
+        variants[i].y2 = variants[i].y + 200;
         string stroka = variants[i].adress;
         int onepose = stroka.find("/");
         int twopose = stroka.find("/", onepose + 1);
@@ -119,19 +122,6 @@ int main()
     int nomer_vybrannoi_kartinki = -1000;
 
     MapObject chasti[COUNT_KAR];
-    chasti[0] = {400, 100, 1000, 500};
-    chasti[1] = {400, 100, 1000, 500};
-    chasti[2] = {400, 100, 1000, 500};
-    chasti[3] = {500, 100, 740, 270};
-    chasti[4] = {500, 100, 740, 270};
-    chasti[5] = {500, 100, 740, 270};
-    chasti[6] = {750, 250, 990, 420};
-    chasti[7] = {750, 250, 990, 420};
-    chasti[8] = {750, 250, 990, 420};
-    chasti[9] = {550, 400,800,500};
-    chasti[10] = {550, 400,800,500};
-    chasti[11] = {550, 400,800,500};
-    chasti[12] = {400,100,1000,500};
 
     for (int i = 0; i < COUNT_KAR; i++)
     {
@@ -141,6 +131,39 @@ int main()
         chasti[i].srk_width = variants[i].srk_width;
         chasti[i].srk_height = variants[i].srk_height;
         chasti[i].visible = false;
+
+        if (chasti[i].Kategorya == "xvost")
+        {
+            chasti[i].x =  750;
+            chasti[i].y =  250;
+            chasti[i].x2 =  990;
+            chasti[i].y2 =  420;
+        }
+
+        if (chasti[i].Kategorya == "Pony" ||
+            chasti[i].Kategorya == "Telo")
+        {
+            chasti[i].x =  400;
+            chasti[i].y =  100;
+            chasti[i].x2 =  1000;
+            chasti[i].y2 =  500;
+        }
+
+        if (chasti[i].Kategorya == "Head")
+        {
+            chasti[i].x =  500;
+            chasti[i].y =  100;
+            chasti[i].x2 =  740;
+            chasti[i].y2 =  270;
+        }
+
+        if (chasti[i].Kategorya == "kopta")
+        {
+            chasti[i].x =  550;
+            chasti[i].y =  400;
+            chasti[i].x2 = 800;
+            chasti[i].y2 = 500;
+        }
     }
 
 
@@ -166,12 +189,12 @@ int main()
             	txSetColor(TX_BLACK);
                 txRectangle (400, 100,800,500);
                 txDrawText(400, 100,800,500,
-                    "прг\n"
+                    "ГЇГ°ГЈ\n"
                     "\n"
                     "\n"
-                    "прг\n"
-                    "прг\n"
-                    "прг\n");
+                    "ГЇГ°ГЈ\n"
+                    "ГЇГ°ГЈ\n"
+                    "ГЇГ°ГЈ\n");
 
                 if (txMouseButtons() == 1 &&
                     txMouseX() > 400 &&
@@ -187,7 +210,7 @@ int main()
         }
 
 
-        if (buttons[6].Click())//Сохранение
+        if (buttons[6].Click())//Г‘Г®ГµГ°Г Г­ГҐГ­ГЁГҐ
         {
 
             ofstream file1("Fail1.txt");
@@ -204,10 +227,10 @@ int main()
 
             file1.close();
 
-            txMessageBox("Сохранено в Fail1.txt");
+            txMessageBox("Г‘Г®ГµГ°Г Г­ГҐГ­Г® Гў Fail1.txt");
         }
 
-        else if (buttons[7].Click()) //Загрузка
+        else if (buttons[7].Click()) //Г‡Г ГЈГ°ГіГ§ГЄГ 
         {
             string stroka;
             string stroka2;
@@ -267,18 +290,12 @@ int main()
             }
         }
 
-
-
-        //for(/*int i*/ nomer_vybrannoi_kartinki = 0; nomer_vybrannoi_kartinki < COUNT_KAR; nomer_vybrannoi_kartinki++)
         if (nomer_vybrannoi_kartinki >= 0)
         {
             if (chasti[nomer_vybrannoi_kartinki].Click() and txGetPixel (txMouseX(), txMouseY()) != TX_GREEN)
             {
                 chasti[nomer_vybrannoi_kartinki].najatieKartinki = true;
             }
-
-            //if (txGetPixel (x, y) == TX_GREEN)
-
 
             if ((txMouseButtons() & 1) &&  chasti[nomer_vybrannoi_kartinki].najatieKartinki)
             {
@@ -355,22 +372,6 @@ int main()
         txDeleteDC (variants[i].picture);
         txDeleteDC (chasti[i].picture);
     }
-
-   /* ofstream file1("Fail1.txt");
-
-    for (int nomer = 0; nomer < COUNT_KAR; nomer++)
-    {
-        if (chasti[nomer].visible)
-        {
-            file1 << chasti[nomer].x << endl;
-            file1 << chasti[nomer].y << endl;
-            file1 << chasti[nomer].adress << endl;
-        }
-    }
-
-
-    file1.close();   */
-
 
     return 0;
 }
