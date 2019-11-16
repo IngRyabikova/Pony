@@ -10,7 +10,7 @@ using namespace std;
 void risyemKChasti (int COUNT_KAR, string selected_category, MapObject vybor_pony[], MapObject chasti[])
 {
     for (int i = 0; i < COUNT_KAR; i++)
-     {
+    {
        if (vybor_pony [i].Click() &&
             (vybor_pony[i].Kategorya == selected_category))
         {
@@ -34,23 +34,23 @@ void risyemKChasti (int COUNT_KAR, string selected_category, MapObject vybor_pon
 void risyemChasti (int COUNT_KAR, MapObject chasti[])
 {
     for (int i = 0; i < COUNT_KAR; i++)
+    {
+        if(chasti[i].visible)
         {
-            if(chasti[i].visible)
-            {
-                chasti[i].drawMapObject2();
-            }
+            chasti[i].drawMapObject2();
         }
+    }
 }
 
 void risyemKPony (int COUNT_KAR, string selected_category, MapObject vybor_pony[])
 {
     for (int i = 0; i < COUNT_KAR; i++)
+    {
+        if (selected_category == vybor_pony[i].Kategorya)
         {
-            if (selected_category == vybor_pony[i].Kategorya)
-            {
-                vybor_pony[i].drawMapObject2();
-            }
+            vybor_pony[i].drawMapObject2();
         }
+    }
 }
 
 void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
@@ -65,24 +65,19 @@ void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
 int main()
 {
     setlocale(LC_ALL, "Russian");
-
-
-
-
     txCreateWindow(1200, 700);
-
     txPlaySound("Pony.wav", SND_LOOP );
 
     const int COUNT_BUTT = 8;
     MenuButton buttons[COUNT_BUTT];
-    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"ГЏГ®Г­ГЁ", 530, 140, "Pony"};
-    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Г•ГўГ®Г±ГІ", 530, 140, "xvost"};
-    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"ГЉГ®ГЇГ»ГІГ ", 530, 140, "kopta"};
-    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"ГѓГ®Г«Г®ГўГ ", 530, 140, "Head"};
-    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Г’ГҐГ«Г®", 530, 140, "Telo"};
-    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Г‘ГЇГ°Г ГўГЄГ ", 530, 140,""};
-    buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Г‘Г®ГµГ°Г Г­ГЁГІГј", 530, 140,""};
-    buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Г‡Г ГЈГ°ГіГ§ГЁГІГј", 530, 140,""};
+    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140, "Pony"};
+    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Хвост", 530, 140, "xvost"};
+    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"Копыта", 530, 140, "kopta"};
+    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Голова", 530, 140, "Head"};
+    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Тело", 530, 140, "Telo"};
+    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Справка", 530, 140,""};
+    buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Сохранить", 530, 140,""};
+    buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Загрузить", 530, 140,""};
 
     const int COUNT_KAR = 13;
     MapObject variants[COUNT_KAR];
@@ -189,12 +184,12 @@ int main()
             	txSetColor(TX_BLACK);
                 txRectangle (400, 100,800,500);
                 txDrawText(400, 100,800,500,
-                    "ГЇГ°ГЈ\n"
+                    "прг\n"
                     "\n"
                     "\n"
-                    "ГЇГ°ГЈ\n"
-                    "ГЇГ°ГЈ\n"
-                    "ГЇГ°ГЈ\n");
+                    "прг\n"
+                    "прг\n"
+                    "прг\n");
 
                 if (txMouseButtons() == 1 &&
                     txMouseX() > 400 &&
@@ -209,10 +204,8 @@ int main()
             }
         }
 
-
-        if (buttons[6].Click())//Г‘Г®ГµГ°Г Г­ГҐГ­ГЁГҐ
+        if (buttons[6].Click())//Сохранение
         {
-
             ofstream file1("Fail1.txt");
 
             for (int nomer = 0; nomer < COUNT_KAR; nomer++)
@@ -227,34 +220,32 @@ int main()
 
             file1.close();
 
-            txMessageBox("Г‘Г®ГµГ°Г Г­ГҐГ­Г® Гў Fail1.txt");
+            txMessageBox("Сохранено в Fail1.txt");
         }
 
-        else if (buttons[7].Click()) //Г‡Г ГЈГ°ГіГ§ГЄГ 
+        else if (buttons[7].Click()) //Загрузка
         {
-            string stroka;
-            string stroka2;
+            string strokaX;
+            string strokaY;
             string adress;
             ifstream file("Fail1.txt");
 
             while (file.good())
             {
-                getline(file, stroka);
-                if (stroka.size() > 1)
+                getline(file, strokaX);
+                if (strokaX.size() > 1)
                 {
-                    getline(file, stroka2);
+                    getline(file, strokaY);
                     getline(file, adress);
-
-                    txMessageBox(adress.c_str());
 
                     for (int nomer = 0; nomer < COUNT_KAR; nomer++)
                     {
                         if (adress == chasti[nomer].adress)
                         {
                             chasti[nomer].visible = true;
-                            chasti[nomer].x = atoi(stroka.c_str());
+                            chasti[nomer].x = atoi(strokaX.c_str());
                             chasti[nomer].x2 = chasti[nomer].x + chasti[nomer].srk_width;
-                            chasti[nomer].y = atoi(stroka.c_str());
+                            chasti[nomer].y = atoi(strokaY.c_str());
                             chasti[nomer].y2 = chasti[nomer].y + chasti[nomer].srk_height;
                         }
                     }

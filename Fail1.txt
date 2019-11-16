@@ -1,2 +1,9 @@
-Pony
-350
+300
+208
+Pictures/Telo/pony4.bmp
+656
+361
+Pictures/xvost/xvost1.bmp
+478
+511
+Pictures/kopta/kopta2.bmp
