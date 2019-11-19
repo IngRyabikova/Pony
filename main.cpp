@@ -225,6 +225,10 @@ int main()
 
         else if (buttons[7].Click()) //Загрузка
         {
+            for (int nomer = 0; nomer < COUNT_KAR; nomer++)
+            {
+            chasti[nomer].visible = false;
+            }
             string strokaX;
             string strokaY;
             string adress;
