@@ -13,6 +13,7 @@ struct MenuButton
     int shirina;
     int vysota;
     char* Kategorya;
+    int countPics;
 
     void drawButton()
     {
