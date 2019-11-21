@@ -29,14 +29,14 @@ int main()
     buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Сохранить", 530, 140,""};
     buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Загрузить", 530, 140,""};
 
-    int COUNT_KAR = 0;
+    int COUNT_KAR = 9;
     MapObject variants[1000];
    /* variants[0] = {"Pictures/Pony/pony1.bmp"};
     variants[1] = {"Pictures/Pony/pony2.bmp"};
     variants[2] = {"Pictures/Pony/unicorn.bmp"};
     /*variants[3] = {"Pictures/Head/Head1.bmp"};
     variants[4] = {"Pictures/Head/Head2.bmp"};
-    variants[5] = {"Pictures/Head/Head3.bmp"};
+    variants[5] = {"Pictures/Head/Head3.bmp"};  
     /*variants[6] = {"Pictures/xvost/xvost1.bmp"};
     variants[7] = {"Pictures/xvost/xvost2.bmp"};
     variants[8] = {"Pictures/xvost/xvost3.bmp"};  */
@@ -85,6 +85,20 @@ int main()
           }
           closedir (dir);
      }
+     if ((dir = opendir ("Pictures/xvost")) != NULL)
+     {
+          /* print all the files and directories within directory */
+          while ((ent = readdir (dir)) != NULL)
+          {
+               if ((string)ent->d_name != "." &&
+                    (string)ent->d_name != "..")
+               {
+                    variants[COUNT_KAR] = { "Pictures/xvost/" + (string)ent->d_name };
+                    COUNT_KAR = COUNT_KAR + 1;
+               }
+          }
+          closedir (dir);
+     }
      if ((dir = opendir ("Pictures/Head")) != NULL)
      {
           /* print all the files and directories within directory */
@@ -107,7 +121,7 @@ int main()
                if ((string)ent->d_name != "." &&
                     (string)ent->d_name != "..")
                {
-                    variants[COUNT_KAR] = { "Pictures/Pony/" + (string)ent->d_name };
+                    variants[COUNT_KAR] = { "Pictures/Po/" + (string)ent->d_name };
                     COUNT_KAR = COUNT_KAR + 1;
                }
           }
@@ -133,34 +147,34 @@ int main()
         if (variants[i].Kategorya == "Pony")
         {
             variants[i].y = y_Pony;
-            y_Pony  = y_Pony + 160;
+            y_Pony  = y_Pony + 200;
         }
 
         if (variants[i].Kategorya == "Head")
         {
             variants[i].y = y_Head;
-            y_Head  = y_Head + 160;
+            y_Head  = y_Head + 200;
         }
 
         if (variants[i].Kategorya == "xvost")
         {
             variants[i].y = y_xvost;
-            y_xvost  = y_xvost + 160;
+            y_xvost  = y_xvost + 200;
         }
 
         if (variants[i].Kategorya == "kopta")
         {
             variants[i].y = y_kopta;
-            y_kopta  = y_kopta + 160;
+            y_kopta  = y_kopta + 200;
         }
 
         if (variants[i].Kategorya == "Telo")
         {
             variants[i].y = y_Telo;
-            y_Telo  = y_Telo + 160;
+            y_Telo  = y_Telo + 200;
         }
 
-        variants[i].y2 = variants[i].y + 160;
+        variants[i].y2 = variants[i].y + 200;
         variants[i].picture = txLoadImage(variants[i].adress.c_str());
         variants[i].srk_width = get_widht(variants[i].adress);
         variants[i].srk_height = get_height(variants[i].adress);
