@@ -9,63 +9,6 @@
 
 using namespace std;
 
-
-void risyemKChasti (int COUNT_KAR, string selected_category, MapObject vybor_pony[], MapObject chasti[])
-{
-    for (int i = 0; i < COUNT_KAR; i++)
-    {
-       if (vybor_pony [i].Click() &&
-            (vybor_pony[i].Kategorya == selected_category))
-        {
-            chasti[i].visible = !chasti[i].visible;
-
-            for ( int n = 0; n < COUNT_KAR; n++)
-            {
-                if (chasti[i].visible &&
-                    i !=n &&
-                    vybor_pony[n].Kategorya == vybor_pony[i].Kategorya)
-                    {
-                      chasti[n].visible = false;
-                    }
-            }
-
-            txSleep(200);
-        }
-    }
-}
-
-void risyemChasti (int COUNT_KAR, MapObject chasti[])
-{
-    for (int i = 0; i < COUNT_KAR; i++)
-    {
-        if(chasti[i].visible)
-        {
-            chasti[i].drawMapObject2();
-        }
-    }
-}
-
-void risyemKPony (int COUNT_KAR, string selected_category, MapObject vybor_pony[])
-{
-    for (int i = 0; i < COUNT_KAR; i++)
-    {
-        if (selected_category == vybor_pony[i].Kategorya)
-        {
-            vybor_pony[i].drawMapObject2();
-        }
-    }
-}
-
-void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
-{
-    txSetColor(TX_WHITE);
-    for (int i = 0; i <COUNT_BUTT; i++)
-    {
-        buttons[i].drawButton();
-    }
-}
-
-
 int chtenie(string adress, int COUNT_KAR, MapObject variants[])
 {
     DIR *dir;
@@ -201,7 +144,7 @@ int main()
         risyemKPony (COUNT_KAR, selected_category, variants);
         risyemChasti (COUNT_KAR, chasti) ;
 
-        if (buttons[5].Click())
+        if (buttons[5].Click())     //Справка
         {
             txSleep(200);
             bool stop = false;
@@ -210,13 +153,16 @@ int main()
             	txSetFillColor(TX_WHITE);
             	txSetColor(TX_BLACK);
                 txRectangle (400, 100,800,500);
+                txSelectFont("Arial", 40);
                 txDrawText(400, 100,800,500,
-                    "прг\n"
                     "\n"
+                    "Здрасте Приехали\n"
                     "\n"
-                    "прг\n"
-                    "прг\n"
-                    "прг\n");
+                    "Это пони\n"
+                    "Они просто есть\n"
+                    "Еще им можно менять конечности\n"
+                    "\n"
+                    "ХОХО\n");
 
                 if (txMouseButtons() == 1 &&
                     txMouseX() > 400 &&
@@ -231,56 +177,15 @@ int main()
             }
         }
 
-        if (buttons[6].Click())//Сохранение
+        if (buttons[6].Click())     //Сохранение
         {
-            ofstream file1("Fail1.txt");
-
-            for (int nomer = 0; nomer < COUNT_KAR; nomer++)
-            {
-                if (chasti[nomer].visible)
-                {
-                    file1 << chasti[nomer].x << endl;
-                    file1 << chasti[nomer].y << endl;
-                    file1 << chasti[nomer].adress << endl;
-                }
-            }
-
-            file1.close();
-
-            txMessageBox("Сохранено в Fail1.txt");
+            saveToFile (COUNT_KAR, chasti);
         }
 
         else if (buttons[7].Click()) //Загрузка
         {
-            string strokaX;
-            string strokaY;
-            string adress;
-            ifstream file("Fail1.txt");
-
-            while (file.good())
-            {
-                getline(file, strokaX);
-                if (strokaX.size() > 1)
-                {
-                    getline(file, strokaY);
-                    getline(file, adress);
-
-                    for (int nomer = 0; nomer < COUNT_KAR; nomer++)
-                    {
-                        if (adress == chasti[nomer].adress)
-                        {
-                            chasti[nomer].visible = true;
-                            chasti[nomer].x = atoi(strokaX.c_str());
-                            chasti[nomer].x2 = chasti[nomer].x + chasti[nomer].srk_width;
-                            chasti[nomer].y = atoi(strokaY.c_str());
-                            chasti[nomer].y2 = chasti[nomer].y + chasti[nomer].srk_height;
-                        }
-                    }
-                }
-            }
-            file.close();
-         }
-
+            loadFromFile (COUNT_KAR, chasti);
+        }
 
         for (int i = 0; i < COUNT_BUTT; i = i + 1)
         {
@@ -294,7 +199,7 @@ int main()
 
         for(int i = 0; i < COUNT_KAR; i++)
         {
-           int width = chasti[i].x2 - chasti[i].x;
+            int width = chasti[i].x2 - chasti[i].x;
 
             if (chasti[i].x < 300)
             {
