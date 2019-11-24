@@ -7,10 +7,85 @@
 #include <iostream>
 #include <dirent.h>
 
-
 using namespace std;
 
-//
+
+void risyemKChasti (int COUNT_KAR, string selected_category, MapObject vybor_pony[], MapObject chasti[])
+{
+    for (int i = 0; i < COUNT_KAR; i++)
+    {
+       if (vybor_pony [i].Click() &&
+            (vybor_pony[i].Kategorya == selected_category))
+        {
+            chasti[i].visible = !chasti[i].visible;
+
+            for ( int n = 0; n < COUNT_KAR; n++)
+            {
+                if (chasti[i].visible &&
+                    i !=n &&
+                    vybor_pony[n].Kategorya == vybor_pony[i].Kategorya)
+                    {
+                      chasti[n].visible = false;
+                    }
+            }
+
+            txSleep(200);
+        }
+    }
+}
+
+void risyemChasti (int COUNT_KAR, MapObject chasti[])
+{
+    for (int i = 0; i < COUNT_KAR; i++)
+    {
+        if(chasti[i].visible)
+        {
+            chasti[i].drawMapObject2();
+        }
+    }
+}
+
+void risyemKPony (int COUNT_KAR, string selected_category, MapObject vybor_pony[])
+{
+    for (int i = 0; i < COUNT_KAR; i++)
+    {
+        if (selected_category == vybor_pony[i].Kategorya)
+        {
+            vybor_pony[i].drawMapObject2();
+        }
+    }
+}
+
+void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
+{
+    txSetColor(TX_WHITE);
+    for (int i = 0; i <COUNT_BUTT; i++)
+    {
+        buttons[i].drawButton();
+    }
+}
+
+
+int chtenie(string adress, int COUNT_KAR, MapObject variants[])
+{
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir(adress.c_str())) != NULL)
+    {
+        while ((ent = readdir (dir)) != NULL)
+        {
+            if ((string)(ent->d_name) != ".."
+                and (string)(ent->d_name) != ".")
+            {
+                variants[COUNT_KAR] = {adress + (string)(ent->d_name)};
+                COUNT_KAR = COUNT_KAR + 1;
+            }
+        }
+        closedir (dir);
+    }
+
+    return COUNT_KAR;
+}
 
 int main()
 {
@@ -31,96 +106,13 @@ int main()
 
     int COUNT_KAR = 0;
     MapObject variants[1000];
-   /* variants[0] = {"Pictures/Pony/pony1.bmp"};
-    variants[1] = {"Pictures/Pony/pony2.bmp"};
-    variants[2] = {"Pictures/Pony/unicorn.bmp"};
-    /*variants[3] = {"Pictures/Head/Head1.bmp"};
-    variants[4] = {"Pictures/Head/Head2.bmp"};
-    variants[5] = {"Pictures/Head/Head3.bmp"};
-    /*variants[6] = {"Pictures/xvost/xvost1.bmp"};
-    variants[7] = {"Pictures/xvost/xvost2.bmp"};
-    variants[8] = {"Pictures/xvost/xvost3.bmp"};  */
 
-     DIR *dir;
-     struct dirent *ent;
-     if ((dir = opendir ("Pictures/Telo")) != NULL)
-     {
-          /* print all the files and directories within directory */
-          while ((ent = readdir (dir)) != NULL)
-          {
-               if ((string)ent->d_name != "." &&
-                    (string)ent->d_name != "..")
-               {
-                    variants[COUNT_KAR] = { "Pictures/Telo/" + (string)ent->d_name };
-                    COUNT_KAR = COUNT_KAR + 1;
-               }
-          }
-          closedir (dir);
-     }
-     if ((dir = opendir ("Pictures/kopta")) != NULL)
-     {
-          /* print all the files and directories within directory */
-          while ((ent = readdir (dir)) != NULL)
-          {
-               if ((string)ent->d_name != "." &&
-                    (string)ent->d_name != "..")
-               {
-                    variants[COUNT_KAR] = { "Pictures/kopta/" + (string)ent->d_name };
-                    COUNT_KAR = COUNT_KAR + 1;
-               }
-          }
-          closedir (dir);
-     }
-     if ((dir = opendir ("Pictures/xvost")) != NULL)
-     {
-          /* print all the files and directories within directory */
-          while ((ent = readdir (dir)) != NULL)
-          {
-               if ((string)ent->d_name != "." &&
-                    (string)ent->d_name != "..")
-               {
-                    variants[COUNT_KAR] = { "Pictures/xvost/" + (string)ent->d_name };
-                    COUNT_KAR = COUNT_KAR + 1;
-               }
-          }
-          closedir (dir);
-     }
-     if ((dir = opendir ("Pictures/Head")) != NULL)
-     {
-          /* print all the files and directories within directory */
-          while ((ent = readdir (dir)) != NULL)
-          {
-               if ((string)ent->d_name != "." &&
-                    (string)ent->d_name != "..")
-               {
-                    variants[COUNT_KAR] = { "Pictures/Head/" + (string)ent->d_name };
-                    COUNT_KAR = COUNT_KAR + 1;
-               }
-          }
-          closedir (dir);
-     }
-     if ((dir = opendir ("Pictures/Pony")) != NULL)
-     {
-          /* print all the files and directories within directory */
-          while ((ent = readdir (dir)) != NULL)
-          {
-               if ((string)ent->d_name != "." &&
-                    (string)ent->d_name != "..")
-               {
-                    variants[COUNT_KAR] = { "Pictures/Pony/" + (string)ent->d_name };
-                    COUNT_KAR = COUNT_KAR + 1;
-               }
-          }
-          closedir (dir);
-     }
-    //variants[12] = {"Pictures/Telo/pony4.bmp"};
-    //variants[13] = {"Pictures/Telo/pony6.bmp"};
+    COUNT_KAR = chtenie("Pictures/Telo/", COUNT_KAR, variants);
+    COUNT_KAR = chtenie("Pictures/Pony/", COUNT_KAR, variants);
+    COUNT_KAR = chtenie("Pictures/xvost/", COUNT_KAR, variants);
+    COUNT_KAR = chtenie("Pictures/Head/", COUNT_KAR, variants);
+    COUNT_KAR = chtenie("Pictures/kopta/", COUNT_KAR, variants);
 
-    int y_Pony = 0;
-    int y_Head = 0;
-    int y_xvost = 0;
-    int y_kopta = 0;
-    int y_Telo = 0;
     for (int i = 0; i < COUNT_KAR; i++)
     {
         variants[i].x = 1000;
@@ -130,42 +122,22 @@ int main()
         int twopose = stroka.find("/", onepose + 1);
         variants[i].Kategorya = stroka.substr(onepose + 1, twopose - onepose - 1);
 
-        if (variants[i].Kategorya == "Pony")
+        for (int k = 0; k < COUNT_BUTT; k++)
         {
-            variants[i].y = y_Pony;
-            y_Pony  = y_Pony + 160;
+            if (variants[i].Kategorya == buttons[k].Kategorya)
+            {
+                variants[i].y = buttons[k].countPics * 170;
+                buttons[k].countPics = buttons[k].countPics + 1;
+            }
         }
 
-        if (variants[i].Kategorya == "Head")
-        {
-            variants[i].y = y_Head;
-            y_Head  = y_Head + 160;
-        }
-
-        if (variants[i].Kategorya == "xvost")
-        {
-            variants[i].y = y_xvost;
-            y_xvost  = y_xvost + 160;
-        }
-
-        if (variants[i].Kategorya == "kopta")
-        {
-            variants[i].y = y_kopta;
-            y_kopta  = y_kopta + 160;
-        }
-
-        if (variants[i].Kategorya == "Telo")
-        {
-            variants[i].y = y_Telo;
-            y_Telo  = y_Telo + 160;
-        }
-
-        variants[i].y2 = variants[i].y + 160;
+        variants[i].y2 = variants[i].y + 170;
         variants[i].picture = txLoadImage(variants[i].adress.c_str());
         variants[i].srk_width = get_widht(variants[i].adress);
         variants[i].srk_height = get_height(variants[i].adress);
         variants[i].visible = true;
     }
+
 
     string selected_category;
 
@@ -173,7 +145,51 @@ int main()
 
     MapObject chasti[COUNT_KAR];
 
-    fillChasti (COUNT_KAR, chasti, variants);
+    for (int i = 0; i < COUNT_KAR; i++)
+    {
+        chasti[i].picture = variants[i].picture;
+        chasti[i].adress = variants[i].adress;
+        chasti[i].Kategorya = variants[i].Kategorya;
+        chasti[i].srk_width = variants[i].srk_width;
+        chasti[i].srk_height = variants[i].srk_height;
+        chasti[i].visible = false;
+
+        if (chasti[i].Kategorya == "xvost")
+        {
+            chasti[i].x =  750;
+            chasti[i].y =  250;
+            chasti[i].x2 =  990;
+            chasti[i].y2 =  420;
+        }
+
+        if (chasti[i].Kategorya == "Pony" ||
+            chasti[i].Kategorya == "Telo")
+        {
+            chasti[i].x =  400;
+            chasti[i].y =  100;
+            chasti[i].x2 =  1000;
+            chasti[i].y2 =  500;
+        }
+
+        if (chasti[i].Kategorya == "Head")
+        {
+            chasti[i].x =  500;
+            chasti[i].y =  100;
+            chasti[i].x2 =  740;
+            chasti[i].y2 =  270;
+        }
+
+        if (chasti[i].Kategorya == "kopta")
+        {
+            chasti[i].x =  550;
+            chasti[i].y =  400;
+            chasti[i].x2 = 800;
+            chasti[i].y2 = 500;
+        }
+    }
+
+
+
 
     while (!GetAsyncKeyState(VK_ESCAPE))
     {
@@ -194,16 +210,13 @@ int main()
             	txSetFillColor(TX_WHITE);
             	txSetColor(TX_BLACK);
                 txRectangle (400, 100,800,500);
-                txSelectFont("Arial", 40);
                 txDrawText(400, 100,800,500,
+                    "прг\n"
                     "\n"
-                    "Здрасте Приехали\n"
                     "\n"
-                    "Это пони\n"
-                    "Они просто есть\n"
-                    "Еще им можно менять конечности\n"
-                    "\n"
-                    "ХОХО\n");
+                    "прг\n"
+                    "прг\n"
+                    "прг\n");
 
                 if (txMouseButtons() == 1 &&
                     txMouseX() > 400 &&
@@ -220,14 +233,53 @@ int main()
 
         if (buttons[6].Click())//Сохранение
         {
-        saveToFile (COUNT_KAR, chasti);
+            ofstream file1("Fail1.txt");
 
+            for (int nomer = 0; nomer < COUNT_KAR; nomer++)
+            {
+                if (chasti[nomer].visible)
+                {
+                    file1 << chasti[nomer].x << endl;
+                    file1 << chasti[nomer].y << endl;
+                    file1 << chasti[nomer].adress << endl;
+                }
+            }
+
+            file1.close();
+
+            txMessageBox("Сохранено в Fail1.txt");
         }
 
         else if (buttons[7].Click()) //Загрузка
         {
-        loadFromFile (COUNT_KAR, chasti);
-        }
+            string strokaX;
+            string strokaY;
+            string adress;
+            ifstream file("Fail1.txt");
+
+            while (file.good())
+            {
+                getline(file, strokaX);
+                if (strokaX.size() > 1)
+                {
+                    getline(file, strokaY);
+                    getline(file, adress);
+
+                    for (int nomer = 0; nomer < COUNT_KAR; nomer++)
+                    {
+                        if (adress == chasti[nomer].adress)
+                        {
+                            chasti[nomer].visible = true;
+                            chasti[nomer].x = atoi(strokaX.c_str());
+                            chasti[nomer].x2 = chasti[nomer].x + chasti[nomer].srk_width;
+                            chasti[nomer].y = atoi(strokaY.c_str());
+                            chasti[nomer].y2 = chasti[nomer].y + chasti[nomer].srk_height;
+                        }
+                    }
+                }
+            }
+            file.close();
+         }
 
 
         for (int i = 0; i < COUNT_BUTT; i = i + 1)
@@ -238,6 +290,7 @@ int main()
                 txSleep(200);
             }
         }
+
 
         for(int i = 0; i < COUNT_KAR; i++)
         {
