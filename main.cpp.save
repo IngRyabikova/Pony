@@ -65,28 +65,6 @@ void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
     }
 }
 
-
-int chtenie(string adress, int COUNT_KAR, MapObject variants[])
-{
-    DIR *dir;
-    struct dirent *ent;
-    if ((dir = opendir(adress.c_str())) != NULL)
-    {
-        while ((ent = readdir (dir)) != NULL)
-        {
-            if ((string)(ent->d_name) != ".."
-                and (string)(ent->d_name) != ".")
-            {
-                variants[COUNT_KAR] = {adress + (string)(ent->d_name)};
-                COUNT_KAR = COUNT_KAR + 1;
-            }
-        }
-        closedir (dir);
-    }
-
-    return COUNT_KAR;
-}
-
 int main()
 {
     setlocale(LC_ALL, "Russian");
@@ -104,14 +82,99 @@ int main()
     buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Сохранить", 530, 140,""};
     buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Загрузить", 530, 140,""};
 
-    int COUNT_KAR = 0;
+    int COUNT_KAR = 12;
     MapObject variants[1000];
+    //variants[0] = {"Pictures/Pony/pony1.bmp"};
+    //variants[1] = {"Pictures/Pony/pony2.bmp"};
+    ///variants[2] = {"Pictures/Pony/unicorn.bmp"};
 
-    COUNT_KAR = chtenie("Pictures/Telo/", COUNT_KAR, variants);
-    COUNT_KAR = chtenie("Pictures/Pony/", COUNT_KAR, variants);
-    COUNT_KAR = chtenie("Pictures/xvost/", COUNT_KAR, variants);
-    COUNT_KAR = chtenie("Pictures/Head/", COUNT_KAR, variants);
-    COUNT_KAR = chtenie("Pictures/kopta/", COUNT_KAR, variants);
+    variants[3] = {"Pictures/Head/Head1.bmp"};
+    variants[4] = {"Pictures/Head/Head2.bmp"};
+    variants[5] = {"Pictures/Head/Head3.bmp"};
+
+    //variants[6] = {"Pictures/xvost/xvost1.bmp"};
+    //variants[7] = {"Pictures/xvost/xvost2.bmp"};
+    //variants[8] = {"Pictures/xvost/xvost3.bmp"};
+
+    variants[9] = {"Pictures/kopta/kopta1.bmp"};
+    variants[10] = {"Pictures/kopta/kopta2.bmp"};
+    variants[11] = {"Pictures/kopta/kopta3.bmp"};
+
+    //variants[12] = {"Pictures/Telo/pony4.bmp"};
+
+
+
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir ("Pictures\\Telo\\")) != NULL)
+    {
+        while ((ent = readdir (dir)) != NULL)
+        {
+            if ((string)(ent->d_name) != ".."
+                and (string)(ent->d_name) != ".")
+            {
+                variants[COUNT_KAR] = {"Pictures/Telo/" + (string)(ent->d_name)};
+                COUNT_KAR = COUNT_KAR + 1;
+            }
+        }
+        closedir (dir);
+    }
+    
+    if ((dir = opendir ("Pictures\\Pony\\")) != NULL)
+    {
+        while ((ent = readdir (dir)) != NULL)
+        {
+            if ((string)(ent->d_name) != ".."
+                and (string)(ent->d_name) != ".")
+            {
+                variants[COUNT_KAR] = {"Pictures/Pony/" + (string)(ent->d_name)};
+                COUNT_KAR = COUNT_KAR + 1;
+            }
+        }
+        closedir (dir);
+    }
+
+    if ((dir = opendir ("Pictures\\xvost\\")) != NULL)
+    {
+        while ((ent = readdir (dir)) != NULL)
+        {
+            if ((string)(ent->d_name) != ".."
+                and (string)(ent->d_name) != ".")
+            {
+                variants[COUNT_KAR] = {"Pictures/xvost/" + (string)(ent->d_name)};
+                COUNT_KAR = COUNT_KAR + 1;
+            }
+        }
+        closedir (dir);
+    }
+    
+    if ((dir = opendir ("Pictures\\Head\\")) != NULL)
+    {
+        while ((ent = readdir (dir)) != NULL)
+        {
+            if ((string)(ent->d_name) != ".."
+                and (string)(ent->d_name) != ".")
+            {
+                variants[COUNT_KAR] = {"Pictures/Head/" + (string)(ent->d_name)};
+                COUNT_KAR = COUNT_KAR + 1;
+            }
+        }
+        closedir (dir);
+    }
+    
+    if ((dir = opendir ("Pictures\\Pony\\")) != NULL)
+    {
+        while ((ent = readdir (dir)) != NULL)
+        {
+            if ((string)(ent->d_name) != ".."
+                and (string)(ent->d_name) != ".")
+            {
+                variants[COUNT_KAR] = {"Pictures/Pony/" + (string)(ent->d_name)};
+                COUNT_KAR = COUNT_KAR + 1;
+            }
+        }
+        closedir (dir);
+    }
 
     for (int i = 0; i < COUNT_KAR; i++)
     {
@@ -126,12 +189,12 @@ int main()
         {
             if (variants[i].Kategorya == buttons[k].Kategorya)
             {
-                variants[i].y = buttons[k].countPics * 170;
+                variants[i].y = buttons[k].countPics * 200;
                 buttons[k].countPics = buttons[k].countPics + 1;
             }
         }
 
-        variants[i].y2 = variants[i].y + 170;
+        variants[i].y2 = variants[i].y + 200;
         variants[i].picture = txLoadImage(variants[i].adress.c_str());
         variants[i].srk_width = get_widht(variants[i].adress);
         variants[i].srk_height = get_height(variants[i].adress);
