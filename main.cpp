@@ -5,7 +5,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
-#include "dirent.h"
+#include <dirent.h>
 
 using namespace std;
 
