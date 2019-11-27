@@ -1,6 +1,9 @@
 #include <fstream>
 #include <string>
-
+#pragma once
+#include <Windows.h>
+//#include <string>
+using namespace std;
 using namespace std;
 
 int get_height  (string adress)
@@ -23,21 +26,49 @@ int get_widht  (string adress)
 	return widht;
 }
 
+string selectFile(HWND hWnd, bool save)
+{
+	const int SIZE = 100;
+	char nameFile[SIZE];
+	OPENFILENAMEA ofn;
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(ofn);
+	ofn.hwndOwner = hWnd;
+	ofn.lpstrFile = nameFile;
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = SIZE;
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = NULL;
+	ofn.lpstrInitialDir = NULL;
+	ofn.Flags = OFN_CREATEPROMPT;
+
+    if (save)
+    {
+        GetSaveFileNameA(&ofn);
+    }
+    else
+    {
+        GetOpenFileNameA(&ofn);
+	}
+	return nameFile;
+}
+
 void saveToFile (int COUNT_CAR, MapObject chasti[])
 {
-    ofstream file1("Fail1.txt");
+    string newNameFile = selectFile(txWindow(), true);
+	ofstream file(newNameFile);
 
     for (int nomer = 0; nomer < COUNT_CAR; nomer++)
     {
         if (chasti[nomer].visible)
         {
-            file1 << chasti[nomer].x << endl;
-            file1 << chasti[nomer].y << endl;
-            file1 << chasti[nomer].adress << endl;
+            file << chasti[nomer].x << endl;
+            file << chasti[nomer].y << endl;
+            file << chasti[nomer].adress << endl;
         }
     }
 
-    file1.close();
+    file.close();
 
     txMessageBox("Сохранено в Fail1.txt");
 }
@@ -47,7 +78,8 @@ void loadFromFile (int COUNT_KAR, MapObject chasti[])
 	string strokaX;
 	string strokaY;
 	string adress;
-	ifstream file("Fail1.txt");
+    string newNameFile = selectFile(txWindow(), false);
+	ifstream file(newNameFile);
 	for (int nomer = 0; nomer < COUNT_KAR; nomer++)
 	{
 		chasti[nomer].visible = false;
