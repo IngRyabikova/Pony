@@ -36,6 +36,7 @@ int main()
     txCreateWindow(1200, 700);
     txPlaySound("Pony.wav", SND_LOOP );
 
+
     const int COUNT_BUTT = 8;
     MenuButton buttons[COUNT_BUTT];
     buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140, "Pony"};
@@ -50,10 +51,10 @@ int main()
     int COUNT_KAR = 0;
     MapObject variants[1000];
 
-    COUNT_KAR = chtenie("Pictures/Telo/", COUNT_KAR, variants);
-    COUNT_KAR = chtenie("Pictures/Pony/", COUNT_KAR, variants);
+    COUNT_KAR = chtenie("Pictures/Telo/",  COUNT_KAR, variants);
+    COUNT_KAR = chtenie("Pictures/Pony/",  COUNT_KAR, variants);
     COUNT_KAR = chtenie("Pictures/xvost/", COUNT_KAR, variants);
-    COUNT_KAR = chtenie("Pictures/Head/", COUNT_KAR, variants);
+    COUNT_KAR = chtenie("Pictures/Head/",  COUNT_KAR, variants);
     COUNT_KAR = chtenie("Pictures/kopta/", COUNT_KAR, variants);
 
     for (int i = 0; i < COUNT_KAR; i++)
@@ -139,6 +140,15 @@ int main()
         txBegin();
         txSetFillColor(TX_GREEN);
         txClear();
+
+        if (GetAsyncKeyState('W'))
+        {
+            txPlaySound("Pony.wav", SND_LOOP );
+        }
+        else if (GetAsyncKeyState(VK_SPACE))
+        {
+            txPlaySound(NULL);
+        }
 
         risyemKnopki (COUNT_BUTT, buttons) ;
         risyemKPony (COUNT_KAR, selected_category, variants);
