@@ -7,28 +7,10 @@
 #include <iostream>
 #include <dirent.h>
 
+
 using namespace std;
 
-int chtenie(string adress, int COUNT_KAR, MapObject variants[])
-{
-    DIR *dir;
-    struct dirent *ent;
-    if ((dir = opendir(adress.c_str())) != NULL)
-    {
-        while ((ent = readdir (dir)) != NULL)
-        {
-            if ((string)(ent->d_name) != ".."
-                and (string)(ent->d_name) != ".")
-            {
-                variants[COUNT_KAR] = {adress + (string)(ent->d_name)};
-                COUNT_KAR = COUNT_KAR + 1;
-            }
-        }
-        closedir (dir);
-    }
-
-    return COUNT_KAR;
-}
+//
 
 int main()
 {
@@ -36,27 +18,110 @@ int main()
     txCreateWindow(1200, 700);
     txPlaySound("Pony.wav", SND_LOOP );
 
-
-    const int COUNT_BUTT = 8;
+    const int COUNT_BUTT = 7;
     MenuButton buttons[COUNT_BUTT];
-    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140, "Pony"};
-    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Хвост", 530, 140, "xvost"};
-    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"Копыта", 530, 140, "kopta"};
-    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Голова", 530, 140, "Head"};
-    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Тело", 530, 140, "Telo"};
-    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Справка", 530, 140,""};
-    buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Сохранить", 530, 140,""};
-    buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Загрузить", 530, 140,""};
+    //buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140, "Pony"};
+    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Хвост", 530, 140, "xvost"};
+    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Копыта", 530, 140, "kopta"};
+    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"Голова", 530, 140, "Head"};
+    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Тело", 530, 140, "Telo"};
+    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Справка", 530, 140, ""};
+    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Сохранить", 530, 140,""};
+    buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Загрузить", 530, 140,""};
+    //buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Загрузить", 530, 140,""};
 
     int COUNT_KAR = 0;
     MapObject variants[1000];
+   /* variants[0] = {"Pictures/Pony/pony1.bmp"};
+    variants[1] = {"Pictures/Pony/pony2.bmp"};
+    variants[2] = {"Pictures/Pony/unicorn.bmp"};
+    /*variants[3] = {"Pictures/Head/Head1.bmp"};
+    variants[4] = {"Pictures/Head/Head2.bmp"};
+    variants[5] = {"Pictures/Head/Head3.bmp"};
+    /*variants[6] = {"Pictures/xvost/xvost1.bmp"};
+    variants[7] = {"Pictures/xvost/xvost2.bmp"};
+    variants[8] = {"Pictures/xvost/xvost3.bmp"};  */
 
-    COUNT_KAR = chtenie("Pictures/Telo/",  COUNT_KAR, variants);
-    COUNT_KAR = chtenie("Pictures/Pony/",  COUNT_KAR, variants);
-    COUNT_KAR = chtenie("Pictures/xvost/", COUNT_KAR, variants);
-    COUNT_KAR = chtenie("Pictures/Head/",  COUNT_KAR, variants);
-    COUNT_KAR = chtenie("Pictures/kopta/", COUNT_KAR, variants);
+     DIR *dir;
+     struct dirent *ent;
+     if ((dir = opendir ("Pictures/Telo")) != NULL)
+     {
+          /* print all the files and directories within directory */
+          while ((ent = readdir (dir)) != NULL)
+          {
+               if ((string)ent->d_name != "." &&
+                    (string)ent->d_name != "..")
+               {
+                    variants[COUNT_KAR] = { "Pictures/Telo/" + (string)ent->d_name };
+                    COUNT_KAR = COUNT_KAR + 1;
+               }
+          }
+          closedir (dir);
+     }
+     if ((dir = opendir ("Pictures/kopta")) != NULL)
+     {
+          /* print all the files and directories within directory */
+          while ((ent = readdir (dir)) != NULL)
+          {
+               if ((string)ent->d_name != "." &&
+                    (string)ent->d_name != "..")
+               {
+                    variants[COUNT_KAR] = { "Pictures/kopta/" + (string)ent->d_name };
+                    COUNT_KAR = COUNT_KAR + 1;
+               }
+          }
+          closedir (dir);
+     }
+     if ((dir = opendir ("Pictures/xvost")) != NULL)
+     {
+          /* print all the files and directories within directory */
+          while ((ent = readdir (dir)) != NULL)
+          {
+               if ((string)ent->d_name != "." &&
+                    (string)ent->d_name != "..")
+               {
+                    variants[COUNT_KAR] = { "Pictures/xvost/" + (string)ent->d_name };
+                    COUNT_KAR = COUNT_KAR + 1;
+               }
+          }
+          closedir (dir);
+     }
+     if ((dir = opendir ("Pictures/Head")) != NULL)
+     {
+          /* print all the files and directories within directory */
+          while ((ent = readdir (dir)) != NULL)
+          {
+               if ((string)ent->d_name != "." &&
+                    (string)ent->d_name != "..")
+               {
+                    variants[COUNT_KAR] = { "Pictures/Head/" + (string)ent->d_name };
+                    COUNT_KAR = COUNT_KAR + 1;
+               }
+          }
+          closedir (dir);
+     }
+    /* if ((dir = opendir ("Pictures/Pony")) != NULL)
+     {
+          // print all the files and directories within directory
+          while ((ent = readdir (dir)) != NULL)
+          {
+               if ((string)ent->d_name != "." &&
+                    (string)ent->d_name != "..")
+               {
+                    variants[COUNT_KAR] = { "Pictures/Pony/" + (string)ent->d_name };
+                    COUNT_KAR = COUNT_KAR + 1;
+               }
+          }
+          closedir (dir);
+     } */
+    //variants[12] = {"Pictures/Telo/pony4.bmp"};
+    //variants[13] = {"Pictures/Telo/pony6.bmp"};
 
+    int y_Pony = 0;
+    int y_Head = 0;
+    int y_xvost = 0;
+    int y_kopta = 0;
+    int y_Telo = 0;
     for (int i = 0; i < COUNT_KAR; i++)
     {
         variants[i].x = 1000;
@@ -66,22 +131,42 @@ int main()
         int twopose = stroka.find("/", onepose + 1);
         variants[i].Kategorya = stroka.substr(onepose + 1, twopose - onepose - 1);
 
-        for (int k = 0; k < COUNT_BUTT; k++)
+        /*if (variants[i].Kategorya == "Pony")
         {
-            if (variants[i].Kategorya == buttons[k].Kategorya)
-            {
-                variants[i].y = buttons[k].countPics * 170;
-                buttons[k].countPics = buttons[k].countPics + 1;
-            }
+            variants[i].y = y_Pony;
+            y_Pony  = y_Pony + 160;
+        }    */
+
+        if (variants[i].Kategorya == "Head")
+        {
+            variants[i].y = y_Head;
+            y_Head  = y_Head + 160;
         }
 
-        variants[i].y2 = variants[i].y + 170;
+        if (variants[i].Kategorya == "xvost")
+        {
+            variants[i].y = y_xvost;
+            y_xvost  = y_xvost + 160;
+        }
+
+        if (variants[i].Kategorya == "kopta")
+        {
+            variants[i].y = y_kopta;
+            y_kopta  = y_kopta + 160;
+        }
+
+        if (variants[i].Kategorya == "Telo")
+        {
+            variants[i].y = y_Telo;
+            y_Telo  = y_Telo + 160;
+        }
+
+        variants[i].y2 = variants[i].y + 160;
         variants[i].picture = txLoadImage(variants[i].adress.c_str());
         variants[i].srk_width = get_widht(variants[i].adress);
         variants[i].srk_height = get_height(variants[i].adress);
         variants[i].visible = true;
     }
-
 
     string selected_category;
 
@@ -89,51 +174,7 @@ int main()
 
     MapObject chasti[COUNT_KAR];
 
-    for (int i = 0; i < COUNT_KAR; i++)
-    {
-        chasti[i].picture = variants[i].picture;
-        chasti[i].adress = variants[i].adress;
-        chasti[i].Kategorya = variants[i].Kategorya;
-        chasti[i].srk_width = variants[i].srk_width;
-        chasti[i].srk_height = variants[i].srk_height;
-        chasti[i].visible = false;
-
-        if (chasti[i].Kategorya == "xvost")
-        {
-            chasti[i].x =  750;
-            chasti[i].y =  250;
-            chasti[i].x2 =  990;
-            chasti[i].y2 =  420;
-        }
-
-        if (chasti[i].Kategorya == "Pony" ||
-            chasti[i].Kategorya == "Telo")
-        {
-            chasti[i].x =  400;
-            chasti[i].y =  100;
-            chasti[i].x2 =  1000;
-            chasti[i].y2 =  500;
-        }
-
-        if (chasti[i].Kategorya == "Head")
-        {
-            chasti[i].x =  500;
-            chasti[i].y =  100;
-            chasti[i].x2 =  740;
-            chasti[i].y2 =  270;
-        }
-
-        if (chasti[i].Kategorya == "kopta")
-        {
-            chasti[i].x =  550;
-            chasti[i].y =  400;
-            chasti[i].x2 = 800;
-            chasti[i].y2 = 500;
-        }
-    }
-
-
-
+    fillChasti (COUNT_KAR, chasti, variants);
 
     while (!GetAsyncKeyState(VK_ESCAPE))
     {
@@ -154,17 +195,17 @@ int main()
         risyemKPony (COUNT_KAR, selected_category, variants);
         risyemChasti (COUNT_KAR, chasti) ;
 
-        if (buttons[5].Click())     //Справка
+        if (buttons[4].Click())
         {
             txSleep(200);
             bool stop = false;
             while (stop == false)
             {
-            	txSetFillColor(TX_WHITE);
-            	txSetColor(TX_BLACK);
-                txRectangle (0, 0,1200,1200);
-                txSelectFont("Arial", 40);
-                txDrawText(0, 0,1200,1200,
+               txSetFillColor(TX_WHITE);
+               txSetColor(TX_BLACK);
+               txRectangle (0, 0,1200,1200);
+               txSelectFont("Arial", 40);
+               txDrawText(0, 0,1200,1200,
                     "\n"
                     "Здрасте Приехали\n"
                     "Это пони\n"
@@ -183,11 +224,7 @@ int main()
                     "\n"
                     "ХОХО\n");
 
-                if (txMouseButtons() == 1 &&
-                    txMouseX() > 400 &&
-                    txMouseY() > 100 &&
-                    txMouseX() < 800 &&
-                    txMouseY() < 500)
+                if (txMouseButtons() == 1)
                 {
                     stop = true;
                 }
@@ -196,15 +233,16 @@ int main()
             }
         }
 
-        if (buttons[6].Click())     //Сохранение
+        if (buttons[5].Click())//Сохранение
         {
-            saveToFile (COUNT_KAR, chasti);
+        saveToFile (COUNT_KAR, chasti);
         }
 
-        else if (buttons[7].Click()) //Загрузка
+        else if (buttons[6].Click()) //Загрузка
         {
-            loadFromFile (COUNT_KAR, chasti);
+        loadFromFile (COUNT_KAR, chasti);
         }
+
 
         for (int i = 0; i < COUNT_BUTT; i = i + 1)
         {
@@ -215,10 +253,9 @@ int main()
             }
         }
 
-
         for(int i = 0; i < COUNT_KAR; i++)
         {
-            int width = chasti[i].x2 - chasti[i].x;
+           int width = chasti[i].x2 - chasti[i].x;
 
             if (chasti[i].x < 300)
             {
