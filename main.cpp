@@ -9,6 +9,9 @@
 
 using namespace std;
 
+const int HELP_BUTTON = 4;
+const int SAVE_BUTTON = 5;
+
 int chtenie(string adress, int COUNT_KAR, MapObject variants[])
 {
     DIR *dir;
@@ -37,16 +40,17 @@ int main()
     txPlaySound("Pony.wav", SND_LOOP );
 
 
-    const int COUNT_BUTT = 8;
+    const int COUNT_BUTT = 7;
     MenuButton buttons[COUNT_BUTT];
-    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140, "Pony"};
-    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Хвост", 530, 140, "xvost"};
-    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"Копыта", 530, 140, "kopta"};
-    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Голова", 530, 140, "Head"};
-    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Тело", 530, 140, "Telo"};
-    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Справка", 530, 140,""};
-    buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Сохранить", 530, 140,""};
-    buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Загрузить", 530, 140,""};
+    //buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Пони", 530, 140, "Pony"};
+    buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Хвост", 530, 140, "xvost"};
+    buttons[1] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400, 90,180,"Копыта", 530, 140, "kopta"};
+    buttons[2] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,180,270,"Голова", 530, 140, "Head"};
+    buttons[3] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,270,360,"Тело", 530, 140, "Telo"};
+    buttons[4] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,360,450,"Справка", 530, 140, ""};
+    buttons[5] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,450,540,"Сохранить", 530, 140,""};
+    buttons[6] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,540,630,"Загрузить", 530, 140,""};
+    //buttons[7] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,630,720,"Загрузить", 530, 140,""};
 
     int COUNT_KAR = 0;
     MapObject variants[1000];
@@ -81,7 +85,6 @@ int main()
         variants[i].srk_height = get_height(variants[i].adress);
         variants[i].visible = true;
     }
-
 
     string selected_category;
 
@@ -141,6 +144,13 @@ int main()
         txSetFillColor(TX_GREEN);
         txClear();
 
+        if  (GetAsyncKeyState(VK_RETURN))
+        {
+            for (int i = 0; i < COUNT_KAR; i++)
+            {
+                chasti[i].visible = false;
+            }
+        }
         if (GetAsyncKeyState('W'))
         {
             txPlaySound("Pony.wav", SND_LOOP );
@@ -154,7 +164,8 @@ int main()
         risyemKPony (COUNT_KAR, selected_category, variants);
         risyemChasti (COUNT_KAR, chasti) ;
 
-        if (buttons[5].Click())     //Справка
+
+        if (buttons[HELP_BUTTON].Click())     //Справка
         {
             txSleep(200);
             bool stop = false;
@@ -163,13 +174,16 @@ int main()
             	txSetFillColor(TX_WHITE);
             	txSetColor(TX_BLACK);
                 txRectangle (0, 0,1200,1200);
-                txSelectFont("Arial", 40);
+                txSelectFont("Arial", 30);
                 txDrawText(0, 0,1200,1200,
                     "\n"
                     "Здрасте Приехали\n"
                     "Это пони\n"
                     "Они просто есть\n"
                     "\n"
+                    "  Если нажать на ПРОБЕЛ то музыка остановится(слава богу)\n"
+                    "  Но если вас ничего не смущает (то вы странный) музыку можно вернуть нажав на W\n"
+                    "  Если нажать на ENTER то ваше творение сотрётся\n"
                     "* Если не помогло, перечислите мне на телефон рублей 300.          \n"
                     "  Умнее от этого вы не станете, но хоть поможете хорошему человеку.\n"
                     "  (89374575744)\n"
@@ -196,12 +210,12 @@ int main()
             }
         }
 
-        if (buttons[6].Click())     //Сохранение
+        if (buttons[SAVE_BUTTON].Click())     //Сохранение
         {
             saveToFile (COUNT_KAR, chasti);
         }
 
-        else if (buttons[7].Click()) //Загрузка
+        else if (buttons[6].Click()) //Загрузка
         {
             loadFromFile (COUNT_KAR, chasti);
         }
@@ -278,7 +292,7 @@ int main()
              chasti[nomer_vybrannoi_kartinki].x += 3;
              chasti[nomer_vybrannoi_kartinki].x2 += 3;
            }
-         if (nomer_vybrannoi_kartinki >= 0 && GetAsyncKeyState(VK_UP))
+        if (nomer_vybrannoi_kartinki >= 0 && GetAsyncKeyState(VK_UP))
            {
              chasti[nomer_vybrannoi_kartinki].y -= 3;
              chasti[nomer_vybrannoi_kartinki].y2 -= 3;
