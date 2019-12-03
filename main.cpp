@@ -42,7 +42,7 @@ int main()
     txCreateWindow(1200, 700);
     txPlaySound("Pony.wav", SND_LOOP );
 
-    HDC fon = txLoadImage("Pictures//fon//fon.bmp");
+    HDC fon = txLoadImage("Pictures/fon/fon.bmp");
 
     const int COUNT_BUTT = 7;
     MenuButton buttons[COUNT_BUTT];
@@ -62,7 +62,6 @@ int main()
     COUNT_KAR = chtenie("Pictures/Head/",  COUNT_KAR, variants);
     COUNT_KAR = chtenie("Pictures/kopta/", COUNT_KAR, variants);
 
-    int y_Pony = 0;
     int y_Head = 0;
     int y_xvost = 0;
     int y_kopta = 0;
@@ -75,12 +74,6 @@ int main()
         int onepose = stroka.find("/");
         int twopose = stroka.find("/", onepose + 1);
         variants[i].Kategorya = stroka.substr(onepose + 1, twopose - onepose - 1);
-
-        /*if (variants[i].Kategorya == "Pony")
-        {
-            variants[i].y = y_Pony;
-            y_Pony  = y_Pony + 160;
-        }    */
 
         if (variants[i].Kategorya == "Head")
         {
@@ -160,6 +153,13 @@ int main()
         risyemChasti (COUNT_KAR, chasti) ;
         risyemKChasti (COUNT_KAR, selected_category, variants, chasti);
 
+        if  (GetAsyncKeyState(VK_RETURN))
+        {
+            for (int i = 0; i < COUNT_KAR; i++)
+            {
+                chasti[i].visible = false;
+            }
+        }
         if (GetAsyncKeyState('W'))
         {
             txPlaySound("Pony.wav", SND_LOOP );
@@ -179,13 +179,16 @@ int main()
                txSetFillColor(TX_WHITE);
                txSetColor(TX_BLACK);
                txRectangle (0, 0,1200,1200);
-               txSelectFont("Arial", 40);
+               txSelectFont("Arial", 30);
                txDrawText(0, 0,1200,1200,
                     "\n"
                     "Здрасте Приехали\n"
                     "Это пони\n"
                     "Они просто есть\n"
                     "\n"
+                    "  Если нажать на ПРОБЕЛ то музыка остановится(слава богу)\n"
+                    "  Но если вас ничего не смущает (то вы странный) музыку можно вернуть нажав на W\n"
+                    "  Если нажать на ENTER то ваше творение сотрётся\n"
                     "* Если не помогло, перечислите мне на телефон рублей 300.          \n"
                     "  Умнее от этого вы не станете, но хоть поможете хорошему человеку.\n"
                     "  (89374575744)\n"
