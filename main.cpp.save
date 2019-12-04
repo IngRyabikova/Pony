@@ -316,19 +316,18 @@ int main()
             if (buttons [i].Click() && buttons[i].Kategorya != "")
             {
                 selected_category = buttons[i].Kategorya;
-
+                
                 bool vseNorm = false;
-                for (int k = 0; k < COUNT_KAR; k++)
+                for(int k = 0; k < COUNT_KAR; k++)
                 {
-                    if (chasti[i].Kategorya == selected_category)
-                        vseNorm = true;
+                   vseNorm = true;
                 }
-
+                
                 if (!vseNorm)
                 {
-                    txMessageBox("ÊÀÊÀß ÒÂÀÐÜ ÓÄÀËÈËÀ ÊÀÐÒÈÍÊÓ ÈËÈ ÏÅÐÅÈÌÅÍÎÂÀËÀ ÏÀÏÊÓ, À Â ÊÎÄÅ ÍÅ ÈÇÌÅÍÈËÀ?");
+                    txMessage("ÊÀÊÀß ÒÂÀÐÜ ÓÄÀËÈËÀ ÊÀÐÒÈÍÊÓ ÈËÈ ÏÅÐÅÈÌÅÍÎÂÀËÀ ÏÀÏÊÓ, À Â ÊÎÄÅ ÍÅ ÈÇÌÅÍÈËÀ??????????");
                 }
-
+                
                 txSleep(200);
             }
         }

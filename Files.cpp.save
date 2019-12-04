@@ -110,11 +110,6 @@ void loadFromFile (int COUNT_KAR, MapObject chasti[])
 	file.close();
 }
 
-inline int GetFilePointer(HANDLE FileHandle)
-{
-    return SetFilePointer(FileHandle, 0, 0, FILE_CURRENT);
-}
-
 bool SaveBMPFile(char *filename, HBITMAP bitmap, HDC bitmapDC, int width, int height)
 {
     bool Success=0;

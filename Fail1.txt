@@ -1,6 +1,6 @@
-350
-112
-Pictures/Telo/pony4.bmp
-444
-98
-Pictures/Head/head1.bmp
+336
+-11
+Pictures/Telo/pony6.bmp
+427
+0
+Pictures/Head/Head2.bmp
