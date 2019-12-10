@@ -54,26 +54,29 @@ string selectFile(HWND hWnd, bool save)
 	return nameFile;
 }
 
-void saveToFile (int COUNT_CAR, MapObject chasti[])
+void saveToFile (int COUNT_CAR, MapObject chasti[])   /////
 {
     string newNameFile = selectFile(txWindow(), true);
-	ofstream file(newNameFile);
 
-    for (int nomer = 0; nomer < COUNT_CAR; nomer++)
+    if (newNameFile.size() != 0)
     {
-        if (chasti[nomer].visible)
-        {
+	 ofstream file(newNameFile);
+
+     for (int nomer = 0; nomer < COUNT_CAR; nomer++)
+     {
+         if (chasti[nomer].visible)
+         {
             file << chasti[nomer].x << endl;
             file << chasti[nomer].y << endl;
             file << chasti[nomer].adress << endl;
-        }
-    }
+         }
+     }
 
     file.close();
+    txMessageBox("Сохранено");
 
-    txMessageBox("Сохранено в Fail1.txt");
+    }
 }
-
 void loadFromFile (int COUNT_KAR, MapObject chasti[])
 {
 	string strokaX;
