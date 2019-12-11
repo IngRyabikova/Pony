@@ -62,7 +62,7 @@ string selectFile(HWND hWnd, bool save)
 
  /// Сохранение файла
 
-void saveToFile (int COUNT_CAR, MapObject chasti[])
+void saveToFile (int COUNT_CAR, MapObject chasti[])   
 {
     string newNameFile = selectFile(txWindow(), true);
 

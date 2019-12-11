@@ -15,7 +15,7 @@ const int FOR_CHAINIKOV = 4;
 
 using namespace std;
 
-int chtenie(string adress, int COUNT_KAR, MapObject variants[])
+int chtenie(string adress, int COUNT_KAR, MapObject variants[]) 
 ///чтение из картиночек из файлов
 {
     DIR *dir;
@@ -27,6 +27,8 @@ int chtenie(string adress, int COUNT_KAR, MapObject variants[])
             if ((string)(ent->d_name) != ".."
                 and (string)(ent->d_name) != ".")
             {
+				cout << ent->d_name << endl;
+				txSleep(1000);
                 variants[COUNT_KAR] = {adress + (string)(ent->d_name)};
                 COUNT_KAR = COUNT_KAR + 1;
             }
@@ -127,7 +129,7 @@ int main()
 
 
     bool GemeStart = false;
-
+     
      /// Выбор судьбы пони)))))))))))))))))))))))))))))))))))))))))))))))
     while (GemeStart == false)
     {
@@ -301,17 +303,17 @@ int main()
             }
         }
 
-
+        
         /// Скриншот на всякий случай
-
+        
         if (GetAsyncKeyState(VK_SNAPSHOT))
         {
             ScreenCapture(395,50,575,500, "1.bmp", txWindow());
             txMessageBox("Сохранено в 1.bmp");
         }
 
-        /// Сохранение на всякий случай
-
+        /// Сохранение на всякий случай  
+          
           if (buttons[SAVEBUTT].Click())
         {
                saveToFile (COUNT_KAR, chasti);
@@ -319,13 +321,13 @@ int main()
 
          /// Загрузка на всякий случай
 
-        else if (buttons[LOADBUTT].Click())
+        else if (buttons[LOADBUTT].Click()) 
         {
                loadFromFile (COUNT_KAR, chasti);
         }
 
         /// Проверка все ли нормально с папкой
-
+        
         for (int i = 0; i < COUNT_BUTT; i = i + 1)
         {
             if (buttons [i].Click() && buttons[i].Kategorya != "")
@@ -347,9 +349,9 @@ int main()
                 txSleep(200);
             }
         }
-
+        
          /// Предел картинок
-
+        
         for(int i = 0; i < COUNT_KAR; i++)
         {
             int width = chasti[i].x2 - chasti[i].x;
@@ -376,39 +378,39 @@ int main()
 
         /// Стрелка влево
 
-        if (nomer_vybrannoi_kartinki >= 0 && GetAsyncKeyState(VK_LEFT))
+        if (nomer_vybrannoi_kartinki >= 0 && GetAsyncKeyState(VK_LEFT)) 
            {
              chasti[nomer_vybrannoi_kartinki].x -= 3;
              chasti[nomer_vybrannoi_kartinki].x2 -= 3;
            }
-
+       
        /// Стрелка вправо
-
+       
         if (nomer_vybrannoi_kartinki >= 0 && GetAsyncKeyState(VK_RIGHT))
            {
              chasti[nomer_vybrannoi_kartinki].x += 3;
              chasti[nomer_vybrannoi_kartinki].x2 += 3;
            }
-
+       
         /// Стрелка вверх
-
+       
         if (nomer_vybrannoi_kartinki >= 0 && GetAsyncKeyState(VK_UP))
            {
              chasti[nomer_vybrannoi_kartinki].y -= 3;
              chasti[nomer_vybrannoi_kartinki].y2 -= 3;
            }
-
+        
         /// Стрелка вниз
-
+        
         if (nomer_vybrannoi_kartinki >= 0 && GetAsyncKeyState(VK_DOWN))
            {
              chasti[nomer_vybrannoi_kartinki].y += 3;
              chasti[nomer_vybrannoi_kartinki].y2 += 3;
            }
-
+       
        /// Уменьшение картиночки
-
-
+       
+       
         if (nomer_vybrannoi_kartinki >= 0 && GetAsyncKeyState(VK_OEM_MINUS))
            {
              chasti[nomer_vybrannoi_kartinki].x2 = chasti[nomer_vybrannoi_kartinki].x +
@@ -416,9 +418,9 @@ int main()
              chasti[nomer_vybrannoi_kartinki].y2 = chasti[nomer_vybrannoi_kartinki].y +
              (chasti[nomer_vybrannoi_kartinki].y2-chasti[nomer_vybrannoi_kartinki].y)*0.99;
            }
-
+        
         /// Увеличение картиночки
-
+        
         if (nomer_vybrannoi_kartinki >= 0 && GetAsyncKeyState(VK_OEM_PLUS))
            {
             chasti[nomer_vybrannoi_kartinki].x2 = chasti[nomer_vybrannoi_kartinki].x +
@@ -433,7 +435,7 @@ int main()
     }
 
     /// Удаление кртиночек
-
+    
     txDeleteDC (fon);
     txDeleteDC (fan);
     txDeleteDC (fen);

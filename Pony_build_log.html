@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Pony build log</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+<tt>
+Build started on: <u>11-12-2019 at 18:48.25</u><br />
+Build ended on: <u>11-12-2019 at 18:48.27</u><p />
+<b>-------------- Build: Debug in Pony (compiler: GNU GCC Compiler - Strict + Fast (SINGLE FILES ONLY))---------------</b><br />
+mingw32-g++.exe "C:\Users\Student\Desktop\Pony-master\main.cpp" -o Pony.exe -mwindows  -Wall -fexceptions  -g<br />
+In file included from C:\Users\Student\Desktop\Pony-master\main.cpp:4:0:<br />
+C:\Users\Student\Desktop\Pony-master\Files.cpp: In function 'bool SaveBMPFile(char*, HBITMAP, HDC, int, int)':<br />
+<font color="#0000ff">C:\Users\Student\Desktop\Pony-master\Files.cpp:138:10: warning: unused variable 'Success' [-Wunused-variable]</font><br />
+     bool Success=0;<br />
+          ^<br />
+C:\Users\Student\Desktop\Pony-master\main.cpp: In function 'int main()':<br />
+<font color="#0000ff">C:\Users\Student\Desktop\Pony-master\main.cpp:57:16: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
+     buttons[0] = {txLoadImage ("Pictures/Menu_Button.bmp"), 0,400,  0, 90,"Хвост", 530, 140, "xvost"};<br />
+                ^<br />
+<font color="#0000ff">C:\Users\Student\Desktop\Pony-master\main.cpp:58:16: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
+     buttons[1] = {buttons[0].baton, 0,400, 90,180,"Копыта", 530, 140, "kopta"};<br />
+                ^<br />
+<font color="#0000ff">C:\Users\Student\Desktop\Pony-master\main.cpp:59:16: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
+     buttons[2] = {buttons[0].baton, 0,400,180,270,"Голова", 530, 140, "Head"};<br />
+                ^<br />
+<font color="#0000ff">C:\Users\Student\Desktop\Pony-master\main.cpp:60:16: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
+     buttons[3] = {buttons[0].baton, 0,400,270,360,"Тело", 530, 140, "Telo"};<br />
+                ^<br />
+<font color="#0000ff">C:\Users\Student\Desktop\Pony-master\main.cpp:61:16: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
+     buttons[4] = {buttons[0].baton, 0,400,360,450,"Справка", 530, 140, ""};<br />
+                ^<br />
+<font color="#0000ff">C:\Users\Student\Desktop\Pony-master\main.cpp:62:16: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
+     buttons[5] = {buttons[0].baton, 0,400,450,540,"Сохранить", 530, 140,""};<br />
+                ^<br />
+<font color="#0000ff">C:\Users\Student\Desktop\Pony-master\main.cpp:63:16: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
+     buttons[6] = {buttons[0].baton, 0,400,540,630,"Загрузить", 530, 140,""};<br />
+                ^<br />
+<font color="#0000ff">C:\Users\Student\Desktop\Pony-master\main.cpp:309:62: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
+             ScreenCapture(395,50,575,500, "1.bmp", txWindow());<br />
+                                                              ^<br />
+<font color="#0000ff">C:\Users\Student\Desktop\Pony-master\main.cpp:331:64: warning: comparison with string literal results in unspecified behaviour [-Waddress]</font><br />
+             if (buttons [i].Click() &amp;&amp; buttons[i].Kategorya != "")<br />
+                                                                ^<br />
+Output size is 1.90 MB<br />
+<font color="#0000ff">Process terminated with status 0 (0 minutes, 2 seconds)</font><br />
+<font color="#0000ff">0 errors, 10 warnings (0 minutes, 2 seconds)</font><br />
+</tt>
+</body>
+</html>
