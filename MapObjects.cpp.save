@@ -41,7 +41,7 @@ struct MapObject
     }
 };
 
-/// При нажатии на картинки с лева, такая же картинка рисуется в центре
+
 
 void risyemKChasti (int COUNT_KAR, string selected_category, MapObject vybor_pony[], MapObject chasti[])
 {
@@ -91,7 +91,7 @@ void risyemChasti (int COUNT_KAR, MapObject chasti[])
     }
 }
 
- /// При нажатии на кнопку слева появляются картинки с права( с той же тематикой)
+ /// Рисуем
 
 void risyemKPony (int COUNT_KAR, string selected_category, MapObject vybor_pony[])
 {
