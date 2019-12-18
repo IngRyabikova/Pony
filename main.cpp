@@ -1,3 +1,8 @@
+/*!
+\file
+\brief Главный файл программы
+*/
+
 #include "TXLib.h"
 #include "Button.cpp"
 #include "MapObjects.cpp"
@@ -15,8 +20,10 @@ const int FOR_CHAINIKOV = 4;
 
 using namespace std;
 
+/*!
+чтение из картиночек из файлов
+*/
 int chtenie(string adress, int COUNT_KAR, MapObject variants[])
-///чтение из картиночек из файлов
 {
     DIR *dir;
     struct dirent *ent;

@@ -1,13 +1,21 @@
+/*!
+\file
+\brief Кнопки
+*/
+
 #include "TXLib.h"
 
 
 struct MenuButton
 {
     HDC baton;
-
+    /// ЛЕВАЯ
     int x1;
+    /// ПРАВАЯ
     int x2;
+    /// ВЕРХ
     int y1;
+    /// НИЗ
     int y2;
     /// Текст
     const char* text;
@@ -20,8 +28,9 @@ struct MenuButton
     ///  Количество картинок в категории
     int countPics;
 
-    /// Рисование кнопки
-
+    /*!
+     Рисование кнопки
+    */
     void drawButton()
     {
         txSelectFont("Arial", 30);
@@ -29,8 +38,9 @@ struct MenuButton
         txDrawText      (x1, y1, x2, y2, text);
     }
 
-    /// Клик
-
+    /*!
+     Клик
+    */
     bool Click()
     {
         if (txMouseButtons() == 1 &&
