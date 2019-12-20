@@ -1,3 +1,7 @@
+/*!
+\file
+\brief Работа с файлами
+*/
 #include <fstream>
 #include <string>
 #pragma once
@@ -7,8 +11,9 @@ using namespace std;
 using namespace std;
 #include "TXLib.h"
 
- /// Получение высоты по адресу
-
+ /*!
+  Получение высоты по адресу
+  */
 int get_height  (string adress)
 {
 	unsigned char info[54];
@@ -19,8 +24,9 @@ int get_height  (string adress)
 	return height;
 }
 
-/// Получение ширины по адресу
-
+/*!
+ Получение ширины по адресу
+*/
 int get_widht  (string adress)
 {
 	unsigned char info[54];
@@ -31,8 +37,9 @@ int get_widht  (string adress)
 	return widht;
 }
 
- ///   Выбрать файл
-
+ /*!
+    Выбрать файл
+ */
 string selectFile(HWND hWnd, bool save)
 {
 	const int SIZE = 100;
@@ -60,8 +67,9 @@ string selectFile(HWND hWnd, bool save)
 	return nameFile;
 }
 
- /// Сохранение файла
-
+ /*!
+  Сохранение файла
+ */
 void saveToFile (int COUNT_CAR, MapObject chasti[])
 {
     string newNameFile = selectFile(txWindow(), true);
@@ -86,8 +94,9 @@ void saveToFile (int COUNT_CAR, MapObject chasti[])
     }
 }
 
-/// Чтение из файла
-
+/*!
+ Чтение из файла
+*/
 void loadFromFile (int COUNT_KAR, MapObject chasti[])
 {
 	string strokaX;
@@ -124,15 +133,17 @@ void loadFromFile (int COUNT_KAR, MapObject chasti[])
 	file.close();
 }
 
-/// Функция скриншота
-
+/*!
+ Функция скриншота
+*/
 inline int GetFilePointer(HANDLE FileHandle)
 {
     return SetFilePointer(FileHandle, 0, 0, FILE_CURRENT);
 }
 
-/// Функция скриншота
-
+/*!
+ Функция скриншота
+*/
 bool SaveBMPFile(char *filename, HBITMAP bitmap, HDC bitmapDC, int width, int height)
 {
     bool Success=0;
@@ -214,8 +225,9 @@ bool SaveBMPFile(char *filename, HBITMAP bitmap, HDC bitmapDC, int width, int he
     return 1;
 }
 
- /// Функция скриншота
-
+ /*!
+  Функция скриншота
+ */
 bool ScreenCapture(int x, int y, int width, int height, char *filename, HWND hwnd)
 {
     HDC hDC= GetDC(hwnd);

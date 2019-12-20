@@ -1,17 +1,33 @@
+/*!
+\file
+\brief Картиночки
+*/
+
 #include "TXLib.h"
 
 struct MapObject
 {
+    /// Адрес
     string adress;
+    /// Право
     int x;
+    /// Низ
     int y;
+    /// Лево
     int x2;
+    /// Верх
     int y2;
+    /// Категория картиночки
     string Kategorya;
+    /// Картинка
     HDC picture;
+    /// Ширина
     int srk_width;
+    /// Высота
     int srk_height;
+    /// Видимость
     bool visible;
+    /// Нажатие
     bool najatieKartinki;
 
     void drawMapObject()
@@ -24,6 +40,7 @@ struct MapObject
         Win32::TransparentBlt(txDC(), x,  y, x2 - x, y2 - y, picture, 0, 0, srk_width, srk_height, TX_WHITE);
     }
 
+    /// Клик
       bool Click()
     {
         if (txMouseButtons() == 1 &&
@@ -41,8 +58,11 @@ struct MapObject
     }
 };
 
-/// При нажатии на картинки с лева, такая же картинка рисуется в центре
+/*!
+При нажатии на картинки с лева, такая же картинка рисуется в центре
 
+\param COUNT_KAR Количество картинок
+*/
 void risyemKChasti (int COUNT_KAR, string selected_category, MapObject vybor_pony[], MapObject chasti[])
 {
     for (int i = 0; i < COUNT_KAR; i++)
@@ -67,8 +87,9 @@ void risyemKChasti (int COUNT_KAR, string selected_category, MapObject vybor_pon
     }
 }
 
-///  Рисуем кнопки
-
+/*!
+  Рисуем кнопки
+*/
 void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
 {
     txSetColor(TX_WHITE);
@@ -78,8 +99,9 @@ void risyemKnopki (int COUNT_BUTT, MenuButton buttons[])
     }
 }
 
- /// Рисуем части пони
-
+ /*!
+  Рисуем части пони
+ */
 void risyemChasti (int COUNT_KAR, MapObject chasti[])
 {
     for (int i = 0; i < COUNT_KAR; i++)
@@ -91,8 +113,9 @@ void risyemChasti (int COUNT_KAR, MapObject chasti[])
     }
 }
 
- /// При нажатии на кнопку слева появляются картинки с права( с той же тематикой)
-
+ /*!
+  При нажатии на кнопку слева появляются картинки с права( с той же тематикой)
+ */
 void risyemKPony (int COUNT_KAR, string selected_category, MapObject vybor_pony[])
 {
     for (int i = 0; i < COUNT_KAR; i++)
@@ -104,8 +127,9 @@ void risyemKPony (int COUNT_KAR, string selected_category, MapObject vybor_pony[
     }
 }
 
- /// Координаты центральных частей
-
+ /*!
+  Координаты центральных частей
+ */
 void fillChasti (int COUNT_KAR, MapObject chasti[], MapObject variants[])
 {
     for (int i = 0; i < COUNT_KAR; i++)
